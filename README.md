@@ -43,17 +43,16 @@
 
 
 ## アソシエーション
-User
-├── has_many :items
-└── has_many :orders
+### Users テーブル
+has_many :items
+has_many :orders
 
-Item
-├── belongs_to :user
-└── has_many :orders
+### Items テーブル
+belongs_to :user
+has_many :orders
 
-Order
-├── belongs_to :user
-└── belongs_to :item
-
+### Orders テーブル
+belongs_to :user
+belongs_to :item
 
 * ...
