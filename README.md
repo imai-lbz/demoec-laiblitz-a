@@ -44,15 +44,15 @@
 
 ## アソシエーション
 ### Users テーブル
-has_many :items
-has_many :orders
+* has_many :items
+* has_many :orders
 
 ### Items テーブル
-belongs_to :user
-has_many :orders
+* belongs_to :user
+* has_many :orders
 
 ### Orders テーブル
-belongs_to :user
-belongs_to :item
+* belongs_to :user
+* belongs_to :item
 
 * ...
