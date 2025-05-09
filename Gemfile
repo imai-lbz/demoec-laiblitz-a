@@ -70,3 +70,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# 自動整形ツール（「インデントが揃っていない」「余分な改行・スペースがある」などの指摘）
+# 公式GitHub: https://github.com/rubocop/rubocop
+group :development do
+  gem 'rubocop', require: false
+end
