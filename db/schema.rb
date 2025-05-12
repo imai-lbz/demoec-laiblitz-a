@@ -19,6 +19,25 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_12_052201) do
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
+ActiveRecord::Schema[7.0].define(version: 2025_05_12_052251) do
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "nickname", null: false
+    t.string "kanji_family_name", null: false
+    t.string "kanji_given_name", null: false
+    t.string "katakana_family_name", null: false
+    t.string "katakana_given_name", null: false
+    t.date "birthday", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
   end
 
 end
