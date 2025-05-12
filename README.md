@@ -28,15 +28,15 @@
 | カラム名            | 型       | オプション              | 説明                  |
 | --------------- | ------- | ------------------ | ------------------- |
 | id              | integer | primary key        | 注文ID                |
-| user        | integer | null:false | 購入者ID（users.id）     |
-| item        | integer | null:false | 購入された商品ID（items.id） |
+| user        | references | null: false, foreign_key: true | 購入者ID（users.id）     |
+| item        | references | null: false, foreign_key: true | 購入された商品ID（items.id） |
 
 
 ## Delivery_adress テーブル（購入情報）
 | カラム名            | 型       | オプション              | 説明                  |
 | --------------- | ------- | ------------------ | ------------------- |
 | id    | integer | primary key        | 配送ID                |
-| order    | integer | null: false        |外部キー                |
+| order    | references | null: false, foreign_key: true |  外部キー              |
 | postal\_code  | string | null: false | 郵便番号          |
 | prefecture_id    | integer | null: false | 都道府県 |
 | city          | string | null: false | 市区町村          |
