@@ -39,10 +39,8 @@ class ItemsController < ApplicationController
 
   def authenticate_admin_user!
     # current_userがnilの場合はerrorが起きてしまうが、先にauthenticate_user!でnilかどうかを確認するようにする
-    if current_user.is_admin?
-      pass
-    else
-      redirect_to root_path
-    end
+    return if current_user.is_admin?
+
+    redirect_to root_path
   end
 end

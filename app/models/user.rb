@@ -14,8 +14,10 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   validates :password, format: { with: VALID_PASSWORD_REGEX }
 
-
   def is_admin?
-    admin_flag
+    # admin_flag
+    # TODO admin_flagカラムを追加したのちにコードを書き換える必要がある
+    # 現時点では全員が管理者であるような挙動になる
+    true
   end
 end
