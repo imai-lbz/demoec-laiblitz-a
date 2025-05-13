@@ -11,4 +11,10 @@ class Item < ApplicationRecord
                                                                                             less_than_or_equal_to: 9_999_999 }
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
+
+  def sold_out?
+    # buyer_id.present?
+    false
+    # todo:orderテーブルを実装した後に修正する必要あり
+  end
 end
