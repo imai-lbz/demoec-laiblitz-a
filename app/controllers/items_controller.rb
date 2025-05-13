@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
   # トップページ
   def index
-    @items = Item.all
+    @items = Item.order(created_at: :desc)
   end
 
   # 商品管理・一覧ページ
