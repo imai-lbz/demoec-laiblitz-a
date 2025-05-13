@@ -22,3 +22,7 @@ unless User.exists?(email: 'test@admin.com')
   )
   puts 'テスト管理者アカウントを作成しました: test@admin.com'
 end
+
+
+# ./seeds/items.rb を読み込む
+require_relative './seeds/items.rb'
