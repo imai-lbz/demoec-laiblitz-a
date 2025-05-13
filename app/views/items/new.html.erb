@@ -15,16 +15,14 @@ app/assets/stylesheets/items/form.css %>
         <%= form_with model: @item,  local: true do |f| %>
 
         <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-        <%# render 'shared/error_messages', model: f.object %>
-        <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-
+        <%= render 'shared/error_messages', model: f.object %>
           <div class="img-upload">
             <div class="weight-bold-text">
               商品画像 <span class="required-badge">必須</span>
             </div>
             <div class="click-upload">
               <%= f.label :image, 'クリックしてファイルをアップロード', class: 'upload-label' %>
-              <%= f.file_field :hoge, id: 'item-image', class: 'file-input' %>
+              <%= f.file_field :image, id: 'item-image', class: 'file-input' %>
             </div>
           </div>
 
@@ -33,14 +31,14 @@ app/assets/stylesheets/items/form.css %>
               <div class="weight-bold-text">
                 商品名 <span class="required-badge">必須</span>
               </div>
-              <%= f.text_area :hoge, class: "items-text", id: "item-name", placeholder: "商品名（必須 40文字まで)", maxlength: "40" %>
+              <%= f.text_area :name, class: "items-text", id: "item-name", placeholder: "商品名（必須 40文字まで)", maxlength: "40" %>
             </div>
             <div class="form-group">
               <div class="items-explain">
                 <div class="weight-bold-text">
                   商品の説明 <span class="required-badge">必須</span>
                 </div>
-                <%= f.text_area :hoge, class: "items-text", id: "item-description", placeholder: "商品の説明（必須 1,000文字まで）", rows: "7", maxlength: "1000" %>
+                <%= f.text_area :description, class: "items-text", id: "item-description", placeholder: "商品の説明（必須 1,000文字まで）", rows: "7", maxlength: "1000" %>
               </div>
             </div>
           </div>
@@ -72,7 +70,7 @@ app/assets/stylesheets/items/form.css %>
                   <span>価格</span> <span class="required-badge">必須</span>
                 </div>
                 <span class="sell-yen">¥</span>
-                <%= f.text_field :hoge, class: "price-input", id: "item-price", placeholder: "半角数字で入力" %>
+                <%= f.text_field :price, class: "price-input", id: "item-price", placeholder: "半角数字で入力" %>
               </div>
             </div>
           </div>
