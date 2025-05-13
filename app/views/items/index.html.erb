@@ -60,7 +60,7 @@
       <% @items.each do |item| %>
         <%= link_to  "item_path(item)", class: 'product-card' do %>
         <div class="product-image-container">
-          <%= image_tag 'placeholder.svg', class: 'product-image' %>
+          <%= image_tag item.image, class: 'product-image' %>
           <%# 商品が売れていれば在庫なしを表示しましょう %>
           <div class="sold-out-badge">
             <span>在庫なし</span>
