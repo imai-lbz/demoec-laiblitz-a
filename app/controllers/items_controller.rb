@@ -18,6 +18,9 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def admin_new
+  end
+
   def new
     @item = Item.new
   end
