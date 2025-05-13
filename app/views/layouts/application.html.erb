@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DemoecLaiblitzA</title>
+    <title>DemoEC</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script type="text/javascript" src="https://js.pay.jp/v1/"></script>
+    <%= stylesheet_link_tag 'application', 'items/form', 'items/show.css', media: 'all'%>
+    <%= javascript_importmap_tags  'application' %>
   </head>
 
   <body>
