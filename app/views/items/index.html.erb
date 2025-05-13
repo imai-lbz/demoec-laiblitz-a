@@ -56,6 +56,31 @@
       <% end %>
       <%# //商品がある場合は表示されないようにしましょう %>
       <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
+
+      <% @items.each do |item| %>
+        <%= link_to  "#", class: 'product-card' do %>
+        <div class="product-image-container">
+          <%= image_tag 'placeholder.svg', class: 'product-image' %>
+          <%# 商品が売れていれば在庫なしを表示しましょう %>
+          <div class="sold-out-badge">
+            <span>在庫なし</span>
+          </div>
+          <%# //商品が売れていれば在庫なしを表示しましょう %>
+        </div>
+        <div class="product-content">
+          <div class="product-category"><%= "カテゴリー名"  %></div>
+          <h3 class="product-name"><%= "商品名"  %></h3>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">¥<%= "販売価格"  %></div>
+        </div>
+        <% end %>
+      <% end %>
+
+
+
+
+
     </div>
   </section>
   <%# /商品一覧 %>
