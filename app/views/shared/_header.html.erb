@@ -27,7 +27,10 @@
                 <%= link_to '商品管理', "#", class: "user-admin" %>
               <% end %>
       
-              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %>
+              <%# link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "logout" %>
+              <%= form_tag(destroy_user_session_path, method: :delete) do %>
+                <%= button_tag 'ログアウト', class: "logout" %>
+              <% end %>
             </div>
           </div>
         <% else %>
