@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, :kanji_family_name, :kanji_given_name, :katakana_family_name,
-  :katakana_given_name, :birthday, presence: true
+            :katakana_given_name, :birthday, presence: true
 
   validates :kanji_family_name, :kanji_given_name, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
   validates :katakana_family_name, :katakana_given_name, format: { with: /\A[ァ-ヶー]+\z/ }
@@ -14,4 +14,8 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   validates :password, format: { with: VALID_PASSWORD_REGEX }
 
+
+  def is_admin?
+    admin_flag
+  end
 end

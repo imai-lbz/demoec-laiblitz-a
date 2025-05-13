@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   # ログインしていない場合はログインページに強制遷移させる。
-  before_action :authenticate_user!, only: [:new]
+  # TODO: 管理者ユーザーで実際に挙動を確認する必要がある
+  before_action :authenticate_user!,       only: [:new]
+  before_action :authenticate_admin_user!, only: [:new]
 
   # トップページ
   def index
@@ -35,7 +37,12 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :description, :category_id, :condition_id, :price, :image)
   end
 
-  authenticate_admin_user!
-
+  def authenticate_admin_user!
+    # current_userがnilの場合はerrorが起きてしまうが、先にauthenticate_user!でnilかどうかを確認するようにする
+    if current_user.is_admin?
+      pass
+    else
+      redirect_to root_path
+    end
   end
 end
