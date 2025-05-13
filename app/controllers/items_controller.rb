@@ -18,6 +18,12 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to @item, notice: '商品を出品しました'
+    else
+      render :new, status: :unprocessable_entity # HTTPステータスコード422を返す。バリデーションエラーを示す。
+    end
   end
 
   private
