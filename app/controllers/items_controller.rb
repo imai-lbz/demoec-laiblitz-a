@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  # ログインしていない場合はログインページに強制遷移させる。
+  before_action :authenticate_user!, only: [:new]
+
   # トップページ
   def index
   end
@@ -20,7 +23,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to @item, notice: '商品を出品しました'
+      redirect_to dashboard_items_path
     else
       render :new, status: :unprocessable_entity # HTTPステータスコード422を返す。バリデーションエラーを示す。
     end
@@ -29,6 +32,10 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :category_id, :condition_id, :price)
+    params.require(:item).permit(:name, :description, :category_id, :condition_id, :price, :image)
+  end
+
+  authenticate_admin_user!
+
   end
 end
