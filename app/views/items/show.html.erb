@@ -7,9 +7,11 @@
         <div class="main-image-container">
           <%= image_tag @item.image, class: "main-image" %>
           <%# 商品が売れている場合は、在庫なしを表示しましょう %>
-          <div class="sold-out-badge">
-            <span>在庫なし</span>
-          </div>
+          <% if @item.sold_out? %>
+            <div class="sold-out-badge">
+              <span>在庫なし</span>
+            </div>
+          <% end %>
           <%# //商品が売れている場合は、在庫なしを表示しましょう %>
         </div>
       </div>
