@@ -11,6 +11,7 @@ class Item < ApplicationRecord
                                                                                             less_than_or_equal_to: 9_999_999 }
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
+  belongs_to :condition
 
   def sold_out?
     # buyer_id.present?
