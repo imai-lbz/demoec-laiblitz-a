@@ -5,13 +5,11 @@
       <div class="product-image-section">
         <div class="main-image-container">
           <%= image_tag @item.image, class: "main-image" %>
-          <%# 商品が売れている場合は、在庫なしを表示しましょう %>
           <% if @item.sold_out? %>
             <div class="sold-out-badge">
               <span>在庫なし</span>
             </div>
           <% end %>
-          <%# //商品が売れている場合は、在庫なしを表示しましょう %>
         </div>
       </div>
       <%# 商品情報セクション %>
@@ -40,11 +38,9 @@
         </div>
         <%# アクションボタン %>
         <div class="product-actions">
-          <%# ログインしているユーザーのみ表示されましょう、また管理者ユーザーは購入ボタンが表示されないようにしましょう %>
           <% if user_signed_in? && !current_user.admin? %>
             <%= button_to '購入する', purchase_item_path(@item), method: :post, class: 'btn btn-purchase' %>
           <% end %>
-          <%# //ログインしているユーザーのみ表示されましょう、また管理者ユーザーは購入ボタンが表示されないようにしましょう %>
         </div>
       </div>
     </div>
