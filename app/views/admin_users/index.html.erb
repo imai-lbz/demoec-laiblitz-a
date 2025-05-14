@@ -18,7 +18,7 @@
         <div>
           <h2 class="section-title">ユーザー一覧</h2>
           <p class="section-description">
-            登録されているユーザーの一覧です。<%= "999" %>人のユーザーが見つかりました。
+            登録されているユーザーの一覧です。<%= @users.count %>人のユーザーが見つかりました。
           </p>
         </div>
       </div>
@@ -38,6 +38,7 @@
           <tbody>
 
             <%# ユーザーのインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+            <% @users.each do |user| %>
               <tr>
 
                 <%# ユーザー名・メールアドレスの表示 %>
@@ -47,8 +48,8 @@
                       <div class="avatar-fallback"></div>
                     </div>
                     <div class="user-details">
-                      <span class="nickname"><%= "ニックネーム" %></span>
-                      <span class="email"><%= "メールアドレス" %></span>
+                        <span class="nickname"><%= user.nickname %></span>
+                        <span class="email"><%= user.email %></span>
                     </div>
                   </div>
                 </td>
@@ -56,7 +57,7 @@
 
                 <%# 登録日の表示 %>
                 <td class="date-col">
-                  <%= "登録日" %>
+                  <%= user.created_at.strftime("%Y-%m-%d") %>
                 </td>
                 <%# /登録日の表示 %>
 
@@ -75,6 +76,7 @@
                 <%# /退会ボタンの表示 %>
 
               </tr>
+            <% end %>
             <%# //ユーザーのインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
 
           </tbody>
