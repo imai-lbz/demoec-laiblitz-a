@@ -42,13 +42,12 @@
             </tr>
           </table>
         </div>
-
         <%# アクションボタン %>
         <div class="product-actions">
           <%# ログインしているユーザーのみ表示されましょう、また管理者ユーザーは購入ボタンが表示されないようにしましょう %>
-          <%# 商品が売れていない場合はこちらを表示しましょう %>
-          <%= link_to '購入する', "#", class: "btn btn-purchase" %>
-          <%# //商品が売れていない場合はこちらを表示しましょう %>
+          <% if user_signed_in? && !current_user.admin? %>
+            <%= button_to '購入する', purchase_item_path(@item), method: :post, class: 'btn btn-purchase' %>
+          <% end %>
           <%# //ログインしているユーザーのみ表示されましょう、また管理者ユーザーは購入ボタンが表示されないようにしましょう %>
         </div>
       </div>
