@@ -12,35 +12,6 @@ class UsersController < ApplicationController
     render 'admin_users/new' # views/users/にないため指定する必要がある
   end
 
-  def new
-    @user = User.new
-  end
-
-  def admin_create
-    @admin_user = User.new(user_params)
-    @admin_user.admin_flag = true
-    if @admin_user.save
-      redirect_to items_path
-    else
-      render :new
-    end
-  end
-
-  def create
-    @user = User.new(user_params)
-    binding.pry
-
-    @user.admin_flag = false
-    if @user.save
-      redirect_to items_path
-    else
-      render :new
-    end
-  end
-
-  def destroy
-  end
-
   private
 
   def basic_auth

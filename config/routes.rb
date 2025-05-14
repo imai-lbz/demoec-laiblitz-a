@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     registrations: 'devise_user'
   }
 
-  resources :users, only: [:index, :new, :create, :destroy] do
+  resources :users, only: [:index] do
     collection do
       get "admin_new"
     end
