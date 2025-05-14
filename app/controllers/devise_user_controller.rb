@@ -8,7 +8,6 @@ class DeviseUserController < Devise::RegistrationsController
       resource.admin_flag = is_admin
       resource.save
       # その他のカスタム処理があればここに記述します
-      binding.pry
     end
   end
 
