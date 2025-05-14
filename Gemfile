@@ -78,9 +78,5 @@ group :development do
 end
 
 gem 'devise'
-gem 'pry-rails'
 
-# 本番環境（Render）のデータベース（PostgreSQL）を使用
-group :production do
-  gem 'pg'
-end
+gem 'pry-rails'
