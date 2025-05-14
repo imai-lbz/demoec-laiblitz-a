@@ -1,5 +1,4 @@
 <%= render "shared/header" %>
-
 <div class="product-detail-page">
     <div class="product-detail-grid">
       <%# 商品画像セクション %>
@@ -15,7 +14,6 @@
           <%# //商品が売れている場合は、在庫なしを表示しましょう %>
         </div>
       </div>
-
       <%# 商品情報セクション %>
       <div class="product-info-section">
         <div class="product-header">
@@ -24,11 +22,9 @@
             <span class="product-price">¥<%= @item.price %></span>
           </div>
         </div>
-
         <div class="product-description">
           <p><%= @item.description %></p>
         </div>
-
         <%# 商品詳細テーブル %>
         <div class="product-details">
           <table class="details-table">
@@ -54,5 +50,4 @@
     </div>
   </div>
 </div>
-
 <%= render "shared/footer" %>
