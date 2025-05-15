@@ -17,6 +17,6 @@ class Item < ApplicationRecord
   def sold_out?
     # buyer_id.present?
     false
-    # todo:orderテーブルを実装した後に修正する必要あり
+    # TODO: orderテーブルを実装した後に修正する必要あり
   end
 end
