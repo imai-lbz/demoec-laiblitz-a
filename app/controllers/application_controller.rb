@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
     # current_userがnilの場合はerrorが起きてしまうが、先にauthenticate_user!でnilかどうかを確認するようにする
     return if current_user.admin?
 
+    # TODO: flashを表示する設定はしていない
+    flash[:alert] = '管理者権限が必要です。'
     redirect_to root_path
   end
 end

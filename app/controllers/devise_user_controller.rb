@@ -4,7 +4,7 @@ class DeviseUserController < Devise::RegistrationsController
 
   def create
     super do |resource|
-      is_admin = request.referrer == 'http://localhost:3000/users/admin_new'
+      is_admin = request.referrer.present? && request.referrer.include?('/users/admin_new')
       resource.admin_flag = is_admin
       resource.save
       # その他のカスタム処理があればここに記述します

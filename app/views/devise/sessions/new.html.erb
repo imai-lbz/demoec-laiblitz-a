@@ -1,6 +1,6 @@
 <%= render "shared/second-header"%>
 
-<%= form_with class: 'registration-main', local: true do |f| %>
+<%= form_with scope: :user, url: user_session_path, class: 'registration-main', local: true do |f| %>
 <div class='form-container'>
   <div class='form-header'>
     <h1 class='form-title'>ログイン</h1>
