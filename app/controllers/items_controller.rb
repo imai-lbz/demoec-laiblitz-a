@@ -21,6 +21,16 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to @item, notice:
+    else
+      @categories = Category.all
+      render :edit
+    end
+  end
+
   def new
     @item = Item.new
   end
