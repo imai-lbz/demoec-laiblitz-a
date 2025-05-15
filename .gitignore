@@ -32,3 +32,5 @@
 
 .Ds_Store
 /config/master.key
+
+*.Zone.Identifier
