@@ -24,7 +24,7 @@
             <div class="dropdown-content">
               <% if current_user.admin? %>
                 <%= link_to 'ユーザー管理', users_path, class: "user-admin" %>
-                <%= link_to '商品管理', "#", class: "user-admin" %>
+                <%= link_to '商品管理', dashboard_items_path, class: "user-admin" %>
               <% end %>
       
               <%# link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "logout" %>
