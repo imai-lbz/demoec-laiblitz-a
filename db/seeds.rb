@@ -18,7 +18,8 @@ unless User.exists?(email: 'test@admin.com')
     kanji_given_name: '太郎',
     katakana_family_name: 'ヤマダ',
     katakana_given_name: 'タロウ',
-    birthday: Date.new(2000, 1, 1)
+    birthday: Date.new(2000, 1, 1),
+    admin_flag: true
   )
   puts 'テスト管理者アカウントを作成しました: test@admin.com'
 end
