@@ -28,7 +28,6 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to dashboard_items_path, notice:
     else
-      @categories = Category.all
       render :edit
     end
   end
