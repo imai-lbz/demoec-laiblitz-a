@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to @item, notice:
+      redirect_to dashboard_items_path, notice:
     else
       @categories = Category.all
       render :edit
