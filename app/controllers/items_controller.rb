@@ -38,11 +38,4 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :description, :category_id, :condition_id, :price, :image)
   end
-
-  def authenticate_admin_user!
-    # current_userがnilの場合はerrorが起きてしまうが、先にauthenticate_user!でnilかどうかを確認するようにする
-    return if current_user.admin?
-
-    redirect_to root_path
-  end
 end

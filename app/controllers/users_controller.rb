@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!,       only: [:index]
+  before_action :authenticate_admin_user!, only: [:index]
   before_action :basic_auth, only: [:admin_new]
 
   def index
-    # @users = User.all
+    @users = User.all
+    render 'admin_users/index'
   end
 
   # 管理者を表すadmin_flagカラムはここで設定するべきではない
