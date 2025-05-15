@@ -10,12 +10,12 @@
 
         <div class="product-summary">
           <div class="checkout-image">
-            <%= image_tag "item-sample.png", class: "summary-image" %>
+            <%= image_tag @item.image, class: "summary-image" %>
           </div>
           <div class="product-details">
-            <h2 class="product-name"><%= "商品名" %></h2>
+            <h2 class="product-name"><%= @item.name %></h2>
             <div class="price-info">
-              <span class="price">¥<%= "販売価格" %></span>
+              <span class="price">¥<%= @item.price %></span>
             </div>
           </div>
         </div>
@@ -24,11 +24,11 @@
         <div class="payment-summary">
           <div class="summary-row">
             <span>商品金額</span>
-            <span>¥<%= "販売価格" %></span>
+            <span>¥<%= @item.price %></span>
           </div>
           <div class="summary-row total">
             <span>お支払い金額</span>
-            <span>¥<%= "販売価格" %></span>
+            <span>¥<%= @item.price %></span>
           </div>
         </div>
         <%# /支払額の表示 %>
@@ -134,7 +134,7 @@
           <%# /配送先の入力 %>
           <div class="form-actions">
             <%= f.submit "購入を確定する", class: "submit-button", id: "button" %>
-            <%= link_to "戻る", "#", class: "cancel-button" %>
+            <%= link_to "戻る", root_path, class: "cancel-button" %>
           </div>
         <% end %>
       </section>

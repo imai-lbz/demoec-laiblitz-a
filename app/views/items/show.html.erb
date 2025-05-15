@@ -39,7 +39,7 @@
         <%# アクションボタン %>
         <div class="product-actions">
           <% if user_signed_in? && !current_user.admin? && !@item.sold_out? %>
-            <%= button_to '購入する', purchase_item_path(@item), method: :post, class: 'btn btn-purchase' %>
+            <%= link_to '購入する', orders_path(@item.id), class: 'btn btn-purchase' %>
           <% end %>
         </div>
       </div>
