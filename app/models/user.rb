@@ -18,6 +18,6 @@ class User < ApplicationRecord
     # TODO: admin_flagを追加したのちにコードを書き替える必要がある
     # 現時点では、全ユーザーが管理者扱いになる
     # true
-    false
+    admin_flag
   end
 end
