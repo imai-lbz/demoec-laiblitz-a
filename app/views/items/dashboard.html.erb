@@ -16,7 +16,7 @@
         </div>
 
         <div class="list-header-actions">
-          <%= link_to '商品を出品する', "#", class: "new-item-button" %>
+          <%= link_to '商品を出品する', new_item_path, class: "new-item-button" %>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
                   <div class="item-info">
                     <div class="item-avatar">
                       <div>
-                        <%= image_tag "item-sample.png", class: "item-image" %>
+                        <%= image_tag item.image, class: "item-image" %>
                         <% if item.sold_out? %>
                           <div class="sold-out">
                             <span>在庫なし</span>
