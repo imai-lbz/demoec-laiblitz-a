@@ -10,6 +10,7 @@ class Item < ApplicationRecord
                                                                                             greater_than_or_equal_to: 300,
                                                                                             less_than_or_equal_to: 9_999_999 }
 
+  has_many :orders
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
@@ -17,6 +18,6 @@ class Item < ApplicationRecord
   def sold_out?
     # buyer_id.present?
     false
-    # todo:orderテーブルを実装した後に修正する必要あり
+    # TODO: orderテーブルを実装した後に修正する必要あり
   end
 end
