@@ -15,4 +15,6 @@ Rails.application.routes.draw do
       get "admin_new"
     end
   end
+
+resources :orders, only: [:index]
 end
