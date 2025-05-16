@@ -9,8 +9,6 @@
 # db/seeds.rb
 
 
-
-
 # ./seeds/items.rb を読み込む
 # require_relative './seeds/items.rb'
 
