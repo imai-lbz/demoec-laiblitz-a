@@ -5,3 +5,5 @@
 //= link application.css
 //= link items/form.css
 //= link items/show.css
+//= link_tree ../../javascript .js
+//= link_tree ../../../vendor/javascript .js

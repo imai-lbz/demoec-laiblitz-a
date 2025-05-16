@@ -9,6 +9,6 @@ class DeliveryAddress < ApplicationRecord
     validates :user_id
     validates :item_id
   end
-
+  
   belongs_to :order
 end
