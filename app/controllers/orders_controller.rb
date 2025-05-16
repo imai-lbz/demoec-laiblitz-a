@@ -8,13 +8,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     if @item.present?
       @order = Order.new(user: current_user, item: @item)
-      @order.build_delivery_address(
-        postal_code: '123-4567',
-        prefecture_id: 1,
-        city: '沖縄',
-        address1: '浦添',
-        phone_number: '08011112222'
-      )
+      @order.build_delivery_address
     else
       flash.now[:alert] = '商品が見つかりません。'
       redirect_to root_path
