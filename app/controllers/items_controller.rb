@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   # ログインしていない場合はログインページに強制遷移させる。
   # TODO: 管理者ユーザーで実際に挙動を確認する必要がある
-  before_action :authenticate_user!,       only: [:new]
-  before_action :authenticate_admin_user!, only: [:new]
+  before_action :authenticate_user!,       only: [:new, :edit, :dashboard, :destroy]
+  before_action :authenticate_admin_user!, only: [:new, :edit, :dashboard, :destroy]
 
   # トップページ
   def index
@@ -11,6 +11,8 @@ class ItemsController < ApplicationController
 
   # 商品管理・一覧ページ
   def dashboard
+    @items = Item.all
+    render 'items/dashboard'
   end
 
   def show
@@ -18,6 +20,22 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to dashboard_items_path, notice:
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+    redirect_to dashboard_items_path
   end
 
   def new

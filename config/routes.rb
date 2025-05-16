@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'items#index'
-  resources :items, only:[:index, :show, :new, :create, :edit] do
+  resources :items, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     collection do
       get "dashboard"
     end
