@@ -1,8 +1,10 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!,      only: [:index]
+  before_action :authenticate_non_admin!, only: [:index]
+
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
-    # binding.pry
     if @item.present?
       @order = Order.new(user: current_user, item: @item)
       @order.build_delivery_address(
@@ -19,11 +21,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # TODO: chargeのエラーを@orderに追加して返すことでフロントでエラーを表示する
-    binding.pry
-
     @order = Order.new(order_params)
-
     return render_index_with_item(alert: '入力内容に誤りがあります。') unless @order.valid?
 
     Payjp.api_key = ENV['PAYJP_SECRET_KEY'] # 自身のPAY.JPテスト秘密鍵を記述しましょう
@@ -35,8 +33,10 @@ class OrdersController < ApplicationController
         currency: 'jpy' # 通貨の種類（日本円）
       )
     rescue Payjp::CardError => e
+      @order.errors.add(:base, "カードエラー: #{e.message}")
       return render_index_with_item(alert: "カードエラー: #{e.message}")
     rescue StandardError => e
+      @order.errors.add(:base, "予期せぬエラー: #{e.message}")
       return render_index_with_item(alert: "予期せぬエラーが発生しました: #{e.message}")
     end
 
@@ -65,5 +65,14 @@ class OrdersController < ApplicationController
         :postal_code, :prefecture_id, :city, :address1, :building, :phone_number
       ]
     ).merge(token: params[:token], item_id: params[:item_id])
+  end
+
+  def authenticate_non_admin!
+    # current_userがnilの場合はerrorが起きてしまうが、先にauthenticate_user!でnilかどうかを確認するようにする
+    return unless current_user.admin?
+
+    # TODO: flashを表示する設定はしていない
+    flash[:alert] = '一般ユーザーしか購入できません'
+    redirect_to root_path
   end
 end
