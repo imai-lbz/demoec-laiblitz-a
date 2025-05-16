@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!,      only: [:index]
   before_action :authenticate_non_admin!, only: [:index]
+  before_action :redirect_if_sold_out,    only: [:index]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -73,6 +74,14 @@ class OrdersController < ApplicationController
 
     # TODO: flashを表示する設定はしていない
     flash[:alert] = '一般ユーザーしか購入できません'
+    redirect_to root_path
+  end
+
+  def redirect_if_sold_out
+    item = Item.find(params[:item_id])
+    return unless item.sold_out?
+
+    flash[:alert] = 'この商品はすでに購入されています。'
     redirect_to root_path
   end
 end

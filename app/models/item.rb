@@ -16,8 +16,6 @@ class Item < ApplicationRecord
   belongs_to :condition
 
   def sold_out?
-    # buyer_id.present?
-    false
-    # TODO: orderテーブルを実装した後に修正する必要あり
+    orders.exists?
   end
 end
