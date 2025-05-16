@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
 
   def create
     # TODO: chargeのエラーを@orderに追加して返すことでフロントでエラーを表示する
+    binding.pry
 
     @order = Order.new(order_params)
 

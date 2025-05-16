@@ -37,6 +37,7 @@
       <%# 支払い情報フォーム %>
       <section class="payment-section">
         <%= form_with model: [@item, @order], url: item_orders_path(@item), id: 'charge-form', class: 'checkout-form', local: true do |f| %>
+          <%= render 'shared/error_messages', model: f.object %>
           <%= f.hidden_field :user_id, value: @order.user_id %>
 
           <%# カード情報の入力 %>
