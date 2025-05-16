@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     collection do
       get "dashboard"
     end
+    resources :orders, only: [:index, :create]
   end
 
   devise_for :users, controllers: {
@@ -15,4 +16,6 @@ Rails.application.routes.draw do
       get "admin_new"
     end
   end
+
+
 end
