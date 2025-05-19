@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  # 親要素を削除するために設定している
   after_destroy :destroy_item_if_unused
 
   attr_accessor :token
@@ -16,7 +17,7 @@ class Order < ApplicationRecord
   private
 
   def destroy_item_if_unused
-    # ほかの注文で使われていなければ item を削除
+    # 複数個出品（未実装）に対応するため、itemを削除する前にほかの注文で使われていないか確認している
     item.destroy if item.orders.empty?
   end
 end
