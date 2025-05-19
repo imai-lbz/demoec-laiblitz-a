@@ -14,7 +14,7 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   validates :password, format: { with: VALID_PASSWORD_REGEX }
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
   def admin?
     # TODO: admin_flagを追加したのちにコードを書き替える必要がある

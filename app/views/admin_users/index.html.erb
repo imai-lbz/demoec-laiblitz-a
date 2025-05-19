@@ -47,13 +47,13 @@
                 </td>
 
                 <td class="role-col">
-                  <span class="role-badge <%= "管理者" ? 'admin' : 'user' %>">
-                    <%= "管理者" ? '管理者' : '一般ユーザー' %>
+                  <span class="role-badge <%= user.admin? ? 'admin' : 'user' %>">
+                    <%= user.admin? ? '管理者' : '一般ユーザー' %>
                   </span>
                 </td>
 
                 <td class="actions-col">
-                  <%= link_to '退会', "#", method: :delete , class: "admin-action-button" %>
+                  <%= link_to '退会', user_path(user),  data: { turbo_method: :delete, turbo_confirm: '本当に退会しますか？' } , class: "admin-action-button" %>
                 </td>
 
               </tr>
