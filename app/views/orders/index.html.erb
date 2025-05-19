@@ -142,7 +142,7 @@
           <%# /配送先の入力 %>
           <div class="form-actions">
             <%= f.submit "購入を確定する", class: "submit-button", id: "button" %>
-            <%= link_to "戻る", root_path, class: "cancel-button" %>
+            <%= link_to "戻る", item_path(@item), class: "cancel-button" %>
           </div>
         <% end %>
       </section>
