@@ -53,7 +53,7 @@
                 </td>
 
                 <td class="actions-col">
-                  <%= link_to '退会', user_path(user),  data: { turbo_method: :delete } , class: "admin-action-button" %>
+                  <%= link_to '退会', user_path(user),  data: { turbo_method: :delete, turbo_confirm: '本当に退会しますか？' } , class: "admin-action-button" %>
                 </td>
 
               </tr>
