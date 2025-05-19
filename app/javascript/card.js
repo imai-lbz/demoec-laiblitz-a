@@ -1,7 +1,15 @@
 
 const pay = () => {
-  const publicKey = gon.public_key
-  const payjp = Payjp(publicKey)
+// Payjp インスタンスの再初期化を防ぐ
+  if (!window._payjpInstance) {
+    if (typeof gon === 'undefined' || !gon.public_key) {
+      console.error("gon.public_key が見つかりません");
+      return;
+    }
+    window._payjpInstance = Payjp(gon.public_key);
+  }
+
+  const payjp = window._payjpInstance;
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
   const expiryElement = elements.create('cardExpiry');
@@ -34,3 +42,4 @@ const pay = () => {
 };
 
 window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);

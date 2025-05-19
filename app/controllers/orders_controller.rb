@@ -50,6 +50,8 @@ class OrdersController < ApplicationController
   def render_index_with_item(status: :unprocessable_entity, alert: nil)
     @item = Item.find(params[:item_id])
     flash.now[:alert] = alert if alert.present?
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
+
     render :index, status: status
   end
 
