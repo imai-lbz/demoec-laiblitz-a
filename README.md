@@ -18,7 +18,7 @@
 | カラム名            | 型       | オプション              | 説明              |
 | --------------- | ------- | ------------------ | --------------- |
 | id              | integer | primary key        | 商品ID            |
-| category\_id   | integer | null: false        | 外部キー   |
+| category\_id   | integer | null: false        | カテゴリー   |
 | name            | string  | null: false        | 商品名             |
 | price           | integer | null: false        | 価格              |
 | condition\_id  | integer | null: false        | 商品状態    |
@@ -32,11 +32,11 @@
 | item        | references | null: false, foreign_key: true | 購入された商品ID（items.id） |
 
 
-## Delivery_adress テーブル（購入情報）
+## Delivery_adress テーブル（配送先情報）
 | カラム名            | 型       | オプション              | 説明                  |
 | --------------- | ------- | ------------------ | ------------------- |
 | id    | integer | primary key        | 配送ID                |
-| order    | references | null: false, foreign_key: true |  外部キー              |
+| order    | references | null: false, foreign_key: true |  購入情報(order.id)              |
 | postal\_code  | string | null: false | 郵便番号          |
 | prefecture_id    | integer | null: false | 都道府県 |
 | city          | string | null: false | 市区町村          |
