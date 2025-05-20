@@ -9,6 +9,11 @@ class ItemsController < ApplicationController
     @items = Item.order(created_at: :desc)
   end
 
+  def category_index
+    @items = Item.where(category_id: params[:category_id]).order(created_at: :desc)
+    render :index
+  end
+
   # 商品管理・一覧ページ
   def dashboard
     @items = Item.all
