@@ -5,9 +5,35 @@
     </div>
 
     <nav class="main-nav desktop-only">
-      <% nav_items = [{'name': 'ホーム', 'href': root_path}, {'name': 'カテゴリー', 'href': "#"},{'name': '人気商品', 'href': "#"}] %>
+      <% nav_items = [
+        {'name': 'ホーム', 'href': root_path},
+        {'name': 'カテゴリー', 'href': "#", 'has_dropdown': true, 'dropdown_items': [
+          {'name': 'メンズ', 'href': root_path},
+          {'name': 'レディース', 'href': root_path},
+          {'name': 'ベビー・キッズ', 'href': root_path},
+          {'name': 'インテリア・住まい・小物', 'href': root_path},
+          {'name': '本・音楽・ゲーム', 'href': root_path},
+          {'name': 'おもちゃ・ホビー・グッズ', 'href': root_path},
+          {'name': '家電・スマホ・カメラ', 'href': root_path},
+          {'name': 'スポーツ・レジャー', 'href': root_path},
+          {'name': 'ハンドメイド', 'href': root_path},
+          {'name': 'その他', 'href': root_path}
+        ]},
+        {'name': '人気商品', 'href': "#"}
+      ] %>
       <% nav_items.each do |item| %>
+        <% if item[:has_dropdown] %>
+          <div class="user-dropdown">
+            <%= link_to item[:name], item[:href], class: "nav-link #{controller_name == item[:href].gsub('/', '') ? 'active' : ''}" %>
+            <div class="dropdown-content">
+              <% item[:dropdown_items].each do |dropdown_item| %>
+                <%= link_to dropdown_item[:name], dropdown_item[:href], class: "user-admin" %>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
         <%= link_to item[:name], item[:href], class: "nav-link #{controller_name == item[:href].gsub('/', '') ? 'active' : ''}" %>
+        <% end %>
       <% end %>
     </nav>
 
