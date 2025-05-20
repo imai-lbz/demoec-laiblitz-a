@@ -167,3 +167,20 @@
   gap: var(--spacing-md);
   margin-top: var(--spacing-2xl);
 }
+
+
+.apply-point-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  color: white;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.apply-point-btn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
