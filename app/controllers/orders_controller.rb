@@ -4,11 +4,11 @@ class OrdersController < ApplicationController
   before_action :redirect_if_sold_out,    only: [:index]
 
   def index
-    @item = Item.find(params[:item_id])
-    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    gon.user_point = current_user.point
-    gon.item_price = @item.price
+    @item = Item.find_by(id: params[:item_id])
     if @item.present?
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
+      gon.user_point = current_user.point
+      gon.item_price = @item.price
       @order = Order.new(user: current_user, item: @item)
       @order.build_delivery_address
     else
@@ -21,14 +21,12 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     return render_index_with_item(alert: '入力内容に誤りがあります。') unless @order.valid?
 
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY'] # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    validate_used_point!(@order)
 
+    charge_amount = @order.item.price - @order.used_point
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     begin
-      charge = Payjp::Charge.create(
-        amount: @order.item.price, # 商品の値段
-        card: order_params[:token], # カードトークン
-        currency: 'jpy' # 通貨の種類（日本円）
-      )
+      charge = Payjp::Charge.create(amount: charge_amount, card: order_params[:token], currency: 'jpy')
     rescue Payjp::CardError => e
       @order.errors.add(:base, "カードエラー: #{e.message}")
       return render_index_with_item(alert: "カードエラー: #{e.message}")
@@ -41,7 +39,7 @@ class OrdersController < ApplicationController
 
     if charge&.paid
       @order.save!
-      give_user_point(@order)
+      update_user_point_balance(@order, charge_amount)
       return redirect_to root_path, notice: '注文が完了しました。'
     end
 
@@ -60,7 +58,7 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(
-      :user_id,
+      :user_id, :used_point,
       delivery_address_attributes: [
         :postal_code, :prefecture_id, :city, :address1, :building, :phone_number
       ]
@@ -76,6 +74,8 @@ class OrdersController < ApplicationController
     redirect_to root_path
   end
 
+  # 以下はcreateで使用するメソッドである
+
   def redirect_if_sold_out
     item = Item.find(params[:item_id])
     return unless item.sold_out?
@@ -84,11 +84,17 @@ class OrdersController < ApplicationController
     redirect_to root_path
   end
 
-  def give_user_point(order)
-    # 200円につき1ポイント付与する
-    reward_point = order.item.price / 200
-
+  def update_user_point_balance(order, charge_amount)
+    reward_point = charge_amount / 200
     user = order.user
-    user.update_column(:point, user.point + reward_point)
+    user.update!(point: user.point - order.used_point + reward_point)
+  end
+
+  def validate_used_point!(order)
+    if order.used_point.negative? || current_user.point < order.used_point
+      raise '使用ポイントが不正です（0以上で、所持ポイント以下にしてください）'
+    elsif order.used_point > order.item.price
+      raise '使用ポイントが商品価格を超えています。'
+    end
   end
 end

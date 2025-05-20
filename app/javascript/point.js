@@ -2,29 +2,31 @@
 const point = () => {
   const applyPointBtn = document.querySelector(".apply-point-btn");
   const pointInput = document.getElementById("used-point-input");
+  const hiddenUsedPointInput = document.getElementById("order_used_point");
+  if (!applyPointBtn || !pointInput || !hiddenUsedPointInput) return;// ボタンが存在しなければ終了
 
-  if (!applyPointBtn || !pointInput) return;// ボタンが存在しなければ終了
-
-
-  const userPoint = gon.user_point;  // ← 所持ポイントを取得
-  console.log("所持ポイント:", userPoint);
-
-  console.log("pointが呼ばれたよ")
+  const userPoint = gon.user_point;
+  const itemPrice = gon.item_price;
 
   applyPointBtn.addEventListener("click", () => {
     console.log("click")
     let usedPoint = parseInt(pointInput.value, 10) || 0;
 
-     // バリデーション: マイナスまたは所持ポイント以上なら 0 にする
-    if (usedPoint < 0 || usedPoint > userPoint) {
+     // バリデーション
+    if (
+      usedPoint < 0 ||
+      usedPoint > userPoint ||
+      usedPoint > itemPrice
+    ) {
       usedPoint = 0;
-      pointInput.value = 0; // フォーム上の値もリセット
     }
 
     // ここで支払金額の再計算や表示の更新を行うことも可能
-    const itemPrice = gon.item_price; // 例：gonで渡していれば
     const finalPrice = Math.max(itemPrice - usedPoint, 0);
     document.querySelector(".summary-row.total span:last-child").textContent = `¥${finalPrice}`;
+
+    hiddenUsedPointInput.value = usedPoint; // railsに渡す使用ポイント数を設定
+    pointInput.value = usedPoint; // 表示するポイントを再設定
   });
 };
 
