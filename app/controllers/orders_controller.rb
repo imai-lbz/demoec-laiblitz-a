@@ -4,8 +4,10 @@ class OrdersController < ApplicationController
   before_action :redirect_if_sold_out,    only: [:index]
 
   def index
-    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
+    gon.user_point = current_user.point
+    gon.item_price = @item.price
     if @item.present?
       @order = Order.new(user: current_user, item: @item)
       @order.build_delivery_address

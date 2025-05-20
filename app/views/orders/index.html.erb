@@ -20,6 +20,20 @@
           </div>
         </div>
 
+        <div class="point-summary">
+          <div class="summary-row">
+            <span>所持ポイント</span>
+            <span class=""><%= @order.user.point %></span>
+          </div>
+          <div class="summary-row used_point">
+            <span>使用ポイント</span>
+            <div>
+              <input type="number" id="used-point-input" class="used-point-input" min="0" max="<%= @order.user.point %>" value="0">
+              <button type="button" class="apply-point-btn">適用</button>
+            </div>
+          </div>
+        </div>
+
         <%# 支払額の表示 %>
         <div class="payment-summary">
           <div class="summary-row">
