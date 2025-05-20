@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
 
     if charge&.paid
       @order.save!
+      give_user_point(@order)
       return redirect_to root_path, notice: '注文が完了しました。'
     end
 
@@ -79,5 +80,13 @@ class OrdersController < ApplicationController
 
     flash[:alert] = 'この商品はすでに購入されています。'
     redirect_to root_path
+  end
+
+  def give_user_point(order)
+    # 200円につき1ポイント付与する
+    reward_point = order.item.price / 200
+
+    user = order.user
+    user.update_column(:point, user.point + reward_point)
   end
 end
