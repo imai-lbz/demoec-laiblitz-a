@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!,      only: [:index]
+  before_action :authenticate_user!,      only: [:index, :create]
   before_action :authenticate_non_admin!, only: [:index]
-  before_action :redirect_if_sold_out,    only: [:index]
+  before_action :redirect_if_sold_out,    only: [:index, :create]
 
   def index
     @item = Item.find_by(id: params[:item_id])
@@ -38,8 +38,8 @@ class OrdersController < ApplicationController
     # binding.pry
 
     if charge&.paid
-      @order.save!
       update_user_point_balance(@order, charge_amount)
+      @order.save!
       return redirect_to root_path, notice: '注文が完了しました。'
     end
 
@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
   def update_user_point_balance(order, charge_amount)
     reward_point = charge_amount / 200
     user = order.user
-    user.update!(point: user.point - order.used_point + reward_point)
+    user.update_column(:point, user.point - order.used_point + reward_point)
   end
 
   def validate_used_point!(order)
