@@ -9,6 +9,8 @@ class OrdersController < ApplicationController
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       gon.user_point = current_user.point
       gon.item_price = @item.price
+      gon.user_coupons = current_user.coupons.index_by(&:id).transform_values(&:discount_rate)
+
       @order = Order.new(user: current_user, item: @item)
       @order.build_delivery_address
       @coupon_options = @order.user.coupons.map do |coupon|
