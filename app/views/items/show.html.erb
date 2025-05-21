@@ -5,6 +5,7 @@
       <div class="product-image-section">
         <div class="main-image-container">
           <%= image_tag @item.image, class: "main-image" %>
+          <%= render "favorites/btn", item: @item %>
           <% if @item.sold_out? %>
             <div class="sold-out-badge">
               <span>在庫なし</span>
@@ -40,7 +41,6 @@
         <div class="product-actions">
           <% if user_signed_in? && !current_user.admin? && !@item.sold_out? %>
             <%= link_to '購入する', item_orders_path(@item),data: { turbo: false }, class: 'btn btn-purchase' %>
-            <%= render "favorites/btn", item: @item %>
           <% end %>
         </div>
       </div>

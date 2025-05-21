@@ -120,12 +120,14 @@
 /* アクションボタン */
 .product-actions {
   margin-top: var(--spacing-xl);
+  display: flex;
 }
 
 .action-buttons {
   display: flex;
   gap: var(--spacing-md);
 }
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -142,7 +144,6 @@
   color: white;
 }
 
-
 .btn-edit {
   background-color: var(--color-info);
   color: white;
@@ -155,17 +156,20 @@
 
 /* お気に入り機能 */
 .like-btn {
- width: 25px;
- height: 30px;
- font-size: 25px;
- color: #808080; 
- margin-left: 20px;
- }
-  
+  font-size: 5vw !important;
+  color: #808080; 
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
 .unlike-btn {
- width: 25px;
- height: 30px;
- font-size: 25px;
- color: #e54747;
- margin-left: 20px;
+  font-size: 5vw !important;
+  color: #e54747;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
  }
+
