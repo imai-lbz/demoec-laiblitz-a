@@ -13,6 +13,7 @@ class CouponsController < ApplicationController
   def create
     @coupon = Coupon.new(coupon_params)
     if @coupon.save
+      @coupon.assign_to_all_users
       redirect_to coupons_path, notice: 'クーポンが登録されました'
     else
       render :new, status: :unprocessable_entity

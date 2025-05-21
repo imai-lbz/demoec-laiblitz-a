@@ -13,9 +13,7 @@ app/assets/stylesheets/items/form.css %>
       <div class="form-main">
         <h2 class="form-title">クーポンの情報を入力</h2>
         <%= form_with model: @coupon,  local: true do |f| %>
-
-        <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-        <%= render 'shared/error_messages', model: f.object %>
+          <%= render 'shared/error_messages', model: f.object %>
           <div class="new-items">
             <div class="form-group">
               <div class="weight-bold-text">
@@ -50,9 +48,7 @@ app/assets/stylesheets/items/form.css %>
           <%# ボタンセクション %>
           <div class="form-actions">
             <%= f.submit "登録", class: "submit-button" %>
-            <%# 管理者出品一覧ページに遷移できるようにしましょう。%>
             <%= link_to 'もどる', coupons_path, class: "cancel-button" %>
-            <%# //管理者出品一覧ページに遷移できるようにしましょう。%>
           </div>
         <% end %>
       </div>
