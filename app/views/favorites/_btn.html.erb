@@ -1,11 +1,9 @@
 <% if item.favorited_by?(current_user) %>
   <%= link_to item_favorites_path(item), method: :delete, data: { turbo_method: :delete } do %>
-    <i class="far fa-heart like-btn"></i>
-     いいね済み
+    <i class="fa fa-heart like-btn"></i>
   <% end %>
 <% else %>
   <%= link_to item_favorites_path(item), method: :post, data: { turbo_method: :post } do %>
-    <i class="fas fa-heart unlike-btn"></i>
-     未いいね
+    <i class="fa fa-heart unlike-btn"></i>
   <% end %>
 <% end %>
