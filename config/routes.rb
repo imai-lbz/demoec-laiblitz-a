@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   root 'items#index'
+  get 'search', to: 'items#search'
+  get ':category_id', to: 'items#category_index', as: :category
   resources :items, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     collection do
       get "dashboard"
-      get 'search', to: 'items#search'
-      get ':category_id', to: 'items#category_index', as: :category
     end
     resources :orders, only: [:index, :create]
   end
