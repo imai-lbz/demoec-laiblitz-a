@@ -11,9 +11,17 @@ class Item < ApplicationRecord
                                                                                             less_than_or_equal_to: 9_999_999 }
 
   has_many :orders, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+
   extend ActiveHash::Associations::ActiveRecordExtensions
+
   belongs_to :category
   belongs_to :condition
+
+  # ユーザーがいいね済みかどうかを判定する関数
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
 
   def sold_out?
     orders.exists?

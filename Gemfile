@@ -98,3 +98,5 @@ end
 gem 'gon'
 
 gem 'payjp'
+
+gem 'font-awesome-sass'
