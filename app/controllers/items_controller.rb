@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to dashboard_items_path, notice:
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
