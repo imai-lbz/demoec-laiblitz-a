@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_20_073816) do
     t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "used_point", default: 0, null: false
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -93,6 +94,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_20_073816) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin_flag"
+    t.integer "point", default: 0, null: false
     t.index ["admin_flag"], name: "index_users_on_admin_flag"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
