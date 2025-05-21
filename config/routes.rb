@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'coupons/index'
+  get 'coupons/new'
+  get 'coupons/create'
   root 'items#index'
   resources :items, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     collection do
