@@ -587,6 +587,18 @@ img {
   color: white;
 }
 
+/* 商品絞り込み */
+.display-flex-content{
+  display: flex;
+}
+
+.select-items{}
+
+.select-content{
+  font-size: var(--font-size-xl);
+    font-weight: 600;
+}
+
 /* 商品カード */
 .products-grid {
   display: grid;
