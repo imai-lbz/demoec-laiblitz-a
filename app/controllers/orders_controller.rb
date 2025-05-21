@@ -11,6 +11,13 @@ class OrdersController < ApplicationController
       gon.item_price = @item.price
       @order = Order.new(user: current_user, item: @item)
       @order.build_delivery_address
+      @coupon_options = @order.user.coupons.map do |coupon|
+        label = []
+        label << coupon.name.presence
+        label << "#{coupon.discount_rate}%"
+        label << "#{coupon.expires_at.to_date}"
+        [label.compact.join(' / '), coupon.id]
+      end
     else
       flash.now[:alert] = '商品が見つかりません。'
       redirect_to root_path

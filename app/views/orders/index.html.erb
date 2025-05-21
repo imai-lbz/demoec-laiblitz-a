@@ -20,6 +20,20 @@
           </div>
         </div>
 
+        <div class="coupon-summary">
+          <div class="summary-row">
+            <label for="coupon-select">使用クーポン（クーポン名/割引率/期限）</label>
+          </div>
+          <div class="summary-row used-coupon">
+            <%= select_tag 'order[coupon_id]',
+              options_for_select(@coupon_options),
+              include_blank: "---",
+              id: "coupon-select",
+              class: "form-select" %>
+          </div>
+        </div>
+
+
         <div class="point-summary">
           <div class="summary-row">
             <span>所持ポイント</span>
