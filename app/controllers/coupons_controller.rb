@@ -1,4 +1,6 @@
 class CouponsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authenticate_admin_user!
   def index
     # binding.pry
     @coupons = Coupon.all
