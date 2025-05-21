@@ -14,6 +14,13 @@ class ItemsController < ApplicationController
     render :index
   end
 
+  def search
+    # binding.pry
+    search_keyword = "%#{params[:q]}%"
+    @items = Item.where('name LIKE ? OR description LIKE ?', search_keyword, search_keyword)
+    render :index
+  end
+
   # 商品管理・一覧ページ
   def dashboard
     @items = Item.all

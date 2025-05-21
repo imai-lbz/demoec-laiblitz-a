@@ -30,7 +30,10 @@
     <div class="header-actions desktop-only">
       <div class="search-container">
         <i class="fas fa-search"></i>
-        <input type="search" placeholder="商品を検索..." class="search-input">
+        <%= form_with url: search_items_path, method: :get, local: true, class: "search-form" do |form| %>
+          <%= form.search_field :q, placeholder: "商品を検索...", class: "search-input" %>
+          <%= form.submit "検索", class: "visually-hidden-submit-button" %>
+        <% end %>
       </div>
 
       <div class="user-menu">
