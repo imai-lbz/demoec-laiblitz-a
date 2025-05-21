@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates :password, format: { with: VALID_PASSWORD_REGEX }
 
   has_many :orders, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   def admin?
     # TODO: admin_flagを追加したのちにコードを書き替える必要がある
