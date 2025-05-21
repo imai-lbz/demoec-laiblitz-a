@@ -15,9 +15,8 @@ class ItemsController < ApplicationController
   end
 
   def search
-    # binding.pry
     search_keyword = "%#{params[:q]}%"
-    @items = Item.where('name LIKE ? OR description LIKE ?', search_keyword, search_keyword)
+    @items = Item.where('name LIKE ? OR description LIKE ?', search_keyword, search_keyword).order(created_at: :desc)
     render :index
   end
 
