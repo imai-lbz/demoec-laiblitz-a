@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2025_05_20_073816) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_21_021031) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -94,8 +93,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_20_073816) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "used_point", default: 0, null: false
-    t.bigint "coupon_assignment_id", null: false
-    t.index ["coupon_assignment_id"], name: "index_orders_on_coupon_assignment_id"
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
