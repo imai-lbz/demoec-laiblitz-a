@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
 
   # 商品管理・一覧ページ
   def dashboard
-    @items = Item.all
+    @items = Item.order(updated_at: :desc)
     render 'items/dashboard'
   end
 

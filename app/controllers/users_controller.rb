@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :basic_auth, only: [:admin_new]
 
   def index
-    @users = User.all
+    @users = User.order(created_at: :desc)
     render 'admin_users/index'
   end
 
