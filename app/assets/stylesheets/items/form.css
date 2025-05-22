@@ -181,7 +181,11 @@
 .img-upload,
 .new-items,
 .items-detail,
-.sell-price {
+.sell-price,
+.coupon-name,    /* ←勝手に追加した */
+.discount_rate,  /* ←勝手に追加した */
+.expiration-date /* ←勝手に追加した */
+{
   background-color: var(--color-background);
   padding: var(--spacing-lg);
   border-radius: var(--radius-md);
