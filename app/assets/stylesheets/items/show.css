@@ -171,5 +171,20 @@
   bottom: 20px;
   right: 20px;
   z-index: 10;
- }
+}
 
+/* 商品一覧用のハートマーク */
+.like-btn_products {
+  font-size: 30px !important;
+  color: #e54747;
+  /* position: absolute; */
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.favorite-link{
+  display: inline-block;
+  position: absolute;
+  z-index: 5;
+}
