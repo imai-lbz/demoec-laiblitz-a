@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get "dashboard"
     end
     resources :orders, only: [:index, :create]
+    resource :favorites, only: [:create, :destroy]
   end
 
   devise_for :users, controllers: {
@@ -18,6 +19,4 @@ Rails.application.routes.draw do
   end
 
   resources :coupons, only:[:index, :new, :create]
-
-
 end

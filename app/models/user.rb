@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :orders,             dependent: :destroy
   has_many :coupon_assignments, dependent: :destroy
   has_many :coupons,            through: :coupon_assignments
+  has_many :favorites,          dependent: :destroy
 
   def admin?
     admin_flag
