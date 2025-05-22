@@ -1,3 +1,4 @@
+<%= include_gon %>
 <%= render "shared/header" %>
 
 <div class="home-page">
@@ -43,19 +44,10 @@
                             options_from_collection_for_select(Condition.all, :id, :name, params[:condition_id]),
                             { prompt: '---', class: 'select-box', id: 'item-condition-select' } %>
             </form>
-
-
-            <%#= form_with url: "#",  local: true do |f| %>
-              <%##= f.collection_select :condition_id, Condition.all, :id, :name, { prompt: '---' }, { class: 'select-box', id: 'item-category' } %>
-              <%#= f.submit "検索", class: "visually-hidden-submit-button" %>
-            <%# end %>
-
-
-
           </div>
         </div>
       </div>
-      <div class="products-grid">
+      <div class="products-grid" id="products-grid">
         <% if @items.any? %>
           <% @items.each do |item| %>
             <%= link_to  item_path(item), class: 'product-card' do %>

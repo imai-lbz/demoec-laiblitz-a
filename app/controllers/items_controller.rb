@@ -7,10 +7,19 @@ class ItemsController < ApplicationController
   # トップページ
   def index
     @items = Item.order(created_at: :desc)
-
-    return unless params[:condition_id].present?
-
-    @items = @items.where(condition_id: params[:condition_id])
+    @items = @items.where(condition_id: params[:condition_id]) if params[:condition_id].present?
+    gon.items = @items.map do |item|
+      {
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        condition_id: item.condition_id,
+        condition_name: item.condition&.name,
+        category_id: item.category_id,
+        category_name: item.category&.name,
+        image_url: item.image.attached? ? url_for(item.image) : nil
+      }
+    end
   end
 
   def category_index
