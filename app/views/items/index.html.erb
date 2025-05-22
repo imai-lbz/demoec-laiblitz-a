@@ -38,11 +38,11 @@
         <div class="select-condition">
           <div class="select-content">商品の状態</div>
           <div class="select-dropdown">
-            <div action="#" id="filter-form">
+            <form action="#" method="get" id="filter-form">
               <%= select_tag :condition_id,
                             options_from_collection_for_select(Condition.all, :id, :name, params[:condition_id]),
-                            { prompt: '---', class: 'select-box', id: 'item-category' } %>
-            </div>
+                            { prompt: '---', class: 'select-box', id: 'item-condition-select' } %>
+            </form>
 
 
             <%#= form_with url: "#",  local: true do |f| %>

@@ -7,6 +7,10 @@ class ItemsController < ApplicationController
   # トップページ
   def index
     @items = Item.order(created_at: :desc)
+
+    return unless params[:condition_id].present?
+
+    @items = @items.where(condition_id: params[:condition_id])
   end
 
   def category_index
