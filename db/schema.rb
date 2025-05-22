@@ -86,6 +86,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_21_021031) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "used_point", default: 0, null: false
+    t.bigint "coupon_assignment_id", null: false
+    t.index ["coupon_assignment_id"], name: "index_orders_on_coupon_assignment_id"
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

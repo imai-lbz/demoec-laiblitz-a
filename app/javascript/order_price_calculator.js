@@ -3,12 +3,14 @@ const point = () => {
   const applyPointBtn        = document.querySelector(".apply-point-btn");
   const pointInput           = document.getElementById("used-point-input");
   const hiddenUsedPointInput = document.getElementById("order_used_point");
+  const hiddenCouponAssignmentID = document.getElementById("order_coupon_assignment_id");
   const couponSelect         = document.getElementById("coupon-select");
-  if (!applyPointBtn || !pointInput || !hiddenUsedPointInput || !couponSelect) return;// ボタンが存在しなければ終了
+  if (!applyPointBtn || !pointInput || !hiddenUsedPointInput || !couponSelect || !hiddenCouponAssignmentID) return;// ボタンが存在しなければ終了
 
   const userPoint   = gon.user_point;
   const itemPrice   = gon.item_price;
   const userCoupons = gon.user_coupons;
+  console.log(userCoupons)
 
   const validatesPoint = (point, userPoint, price) =>{
     if (
@@ -26,9 +28,11 @@ const point = () => {
   };
 
   const updateFinalPrice = () => {
-    const selectedCouponId = couponSelect.value;
-    const discountRate     = userCoupons[selectedCouponId] || 0;
-    const discountPrice    = calculateDiscountPrice(discountRate);
+    const selectedCouponAssignmentId = couponSelect.value;
+    console.log(userCoupons)
+    const discountRate               = userCoupons[selectedCouponAssignmentId] || 0;
+    console.log("rate",selectedCouponAssignmentId , discountRate)
+    const discountPrice              = calculateDiscountPrice(discountRate);
 
     const inputtedPoint = parseInt(pointInput.value, 10) || 0;
     const usedPoint     = validatesPoint(inputtedPoint, userPoint, discountPrice);
@@ -36,8 +40,9 @@ const point = () => {
     const finalPrice = discountPrice - usedPoint;
 
     document.querySelector(".summary-row.total span:last-child").textContent = `¥${finalPrice}`;
-    hiddenUsedPointInput.value = usedPoint;
-    pointInput.value = usedPoint;
+    hiddenUsedPointInput.value     = usedPoint;
+    hiddenCouponAssignmentID.value = selectedCouponAssignmentId;
+    pointInput.value               = usedPoint;
   };
 
   applyPointBtn.addEventListener("click", updateFinalPrice);
