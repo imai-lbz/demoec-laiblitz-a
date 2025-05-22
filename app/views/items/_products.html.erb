@@ -11,8 +11,8 @@
         <% items.each do |item| %>
           <%= link_to  item_path(item), class: 'product-card' do %>
           <div class="product-image-container">
-            <%= image_tag item.image, class: 'product-image' %>
             <%= render "favorites/btn_for_products", item: item %>
+            <%= image_tag item.image, class: 'product-image' %>
             <% if item.sold_out? %>
               <div class="sold-out-badge">
                 <span>在庫なし</span>
