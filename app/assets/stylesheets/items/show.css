@@ -155,20 +155,20 @@
 }
 
 /* お気に入り機能 */
-.like-btn {
+.unlike-btn {
   font-size: 5vw !important;
   color: #808080; 
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
   z-index: 10;
 }
 
-.unlike-btn {
+.like-btn {
   font-size: 5vw !important;
   color: #e54747;
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
   z-index: 10;
  }

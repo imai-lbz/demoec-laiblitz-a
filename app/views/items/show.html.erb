@@ -5,7 +5,9 @@
       <div class="product-image-section">
         <div class="main-image-container">
           <%= image_tag @item.image, class: "main-image" %>
-          <%= render "favorites/btn", item: @item %>
+          <% if user_signed_in? && !current_user.admin? %>
+            <%= render "favorites/btn", item: @item %>
+          <% end %>
           <% if @item.sold_out? %>
             <div class="sold-out-badge">
               <span>在庫なし</span>
