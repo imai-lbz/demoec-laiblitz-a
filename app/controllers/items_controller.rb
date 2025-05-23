@@ -8,6 +8,8 @@ class ItemsController < ApplicationController
   def index
     @items = Item.order(created_at: :desc)
     @items = @items.where(condition_id: params[:condition_id]) if params[:condition_id].present?
+    @promotions = Promotion.all.order(updated_at: :desc)
+    @notices = Notice.all.order(created_at: :desc)
     gon.items = @items.map do |item|
       {
         id: item.id,

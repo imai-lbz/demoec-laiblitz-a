@@ -13,96 +13,12 @@
       </div>
     </div>
   </section>
-
-  <%# 商品一覧 %>
-  <section class="featured-products-section">
-    <div class="section-header">
-      <h2 class="section-title">新着商品</h2>
-      <%= link_to 'すべて見る', root_path, class: 'view-all-link' %>
-    </div>
-    <div class="display-flex-content">
-      <div class="select-items">
-        <div class="select-price">
-          <div class="select-content">金額</div>
-            <div class="select-dropdown">
-              <%= select_tag :price_range,
-                options_for_select([
-      [300, 300],
-      [1000, 1000],
-      [2000, 2000],
-      [4000, 4000],
-      [50000, 50000],
-      [600000, 600000] 
-                ], params[:price_range]),
-                { prompt: '最低金額', class: 'select-box', id: 'item-min-price-select'}
-              %>
-            </div>
-            <div class="select-dropdown">
-              <%= select_tag :price_range,
-                options_for_select([
-      [300, 300],
-      [1000, 1000],
-      [2000, 2000],
-      [4000, 4000],
-      [50000, 50000],
-      [600000, 600000] 
-                ], params[:price_range]),
-                { prompt: '最高金額', class: 'select-box', id: 'item-max-price-select'}
-              %>
-             </div>
-        </div>
-        <div class="select-condition">
-          <div class="select-content">商品の状態</div>
-          <div class="select-dropdown">
-            <%= select_tag :condition_id,
-              options_from_collection_for_select(Condition.all, :id, :name, params[:condition_id]),
-              { prompt: '---', class: 'select-box', id: 'item-condition-select' } %>
-          </div>
-        </div>
-      </div>
-      <div class="products-grid" id="products-grid">
-        <% if @items.any? %>
-          <% @items.each do |item| %>
-            <%= link_to  item_path(item), class: 'product-card' do %>
-            <div class="product-image-container">
-              <%= image_tag item.image, class: 'product-image' %>
-              <%# 商品が売れていれば在庫なしを表示しましょう %>
-              <% if item.sold_out? %>
-                <div class="sold-out-badge">
-                  <span>在庫なし</span>
-                </div>
-              <% end %>
-            </div>
-            <div class="product-content">
-              <div class="product-category"><%= item.category.name  %></div>
-              <h3 class="product-name"><%= item.name  %></h3>
-            </div>
-            <div class="product-footer">
-              <div class="product-price">¥<%= item.price  %></div>
-            </div>
-            <% end %>
-          <% end %>
-        <% else%>
-          <%# ダミー商品表示 %>
-          <%= link_to '#', class: 'product-card' do %>
-            <div class="product-image-container">
-              <%= image_tag "placeholder.svg", class: "product-image" %>
-            </div>
-            <div class="product-content">
-              <div class="product-category"></div>
-              <h3 class="product-name">商品準備中</h3>
-            </div>
-            <div class="product-footer">
-              <div class="product-price">¥<span>99999999</span></div>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  </section>
   <%# /商品一覧 %>
   <%= render partial: 'promotions/banner_scroll', locals: { promotions: @promotions } %>
-  <%= render "products", items: @items, title: "新着商品", show_link: true %>
+  <div class="display-flex-content">
+    <%= render "search" %>
+    <%= render "products", items: @items, title: "新着商品", show_link: true %>
+  </div>
   <%= render "notices/notices", notices: @notices, title: "お知らせ"%>
 </div>
 

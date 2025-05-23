@@ -530,8 +530,7 @@ img {
 .categories-section,
 .featured-products-section {
   max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-lg) 0 calc(var(--spacing-2xl) + 0.5rem);;
 }
 
 .section-header {
@@ -624,9 +623,13 @@ img {
 /* 商品絞り込み */
 .display-flex-content{
   display: flex;
+    margin: 0 auto;
+  justify-content: space-around;
 }
 
-.select-items{}
+.select-items{
+  margin: 0 auto;
+}
 
 .select-content{
   font-size: var(--font-size-xl);
