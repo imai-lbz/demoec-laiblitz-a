@@ -12,4 +12,4 @@
 # ./seeds/items.rb を読み込む
 require_relative './seeds/items.rb'
 
-require_relative './seeds/destroy_legacy_records.rb.rb'
+# require_relative './seeds/destroy_legacy_records.rb.rb'
