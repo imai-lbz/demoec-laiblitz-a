@@ -7,3 +7,5 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "card", to: "card.js"
 pin "condition_search", to: "condition_search.js"
+pin "order_price_calculator", to: "order_price_calculator.js"
+

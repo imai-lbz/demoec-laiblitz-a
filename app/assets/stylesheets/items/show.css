@@ -120,12 +120,14 @@
 /* アクションボタン */
 .product-actions {
   margin-top: var(--spacing-xl);
+  display: flex;
 }
 
 .action-buttons {
   display: flex;
   gap: var(--spacing-md);
 }
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -142,7 +144,6 @@
   color: white;
 }
 
-
 .btn-edit {
   background-color: var(--color-info);
   color: white;
@@ -151,4 +152,41 @@
 .btn-delete {
   background-color: var(--color-error);
   color: white;
+}
+
+/* 商品詳細用のハートマーク */
+.like-btn {
+  font-size: 5vw !important;
+  color: #e54747;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+.unlike-btn {
+  font-size: 5vw !important;
+  color: #808080; 
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+/* 商品一覧用のハートマーク */
+.like-btn_products {
+  font-size: 30px !important;
+  color: #e54747;
+  z-index: 10;
+  position: absolute;
+  bottom: 150px;
+  right: 10px;
+}
+
+.unlike-btn_products {
+  font-size: 30px !important;
+  color: #808080; 
+  z-index: 10;
+  position: absolute;
+  bottom: 150px;
+  right: 10px;
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_15_055339) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_23_073306) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,24 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_15_055339) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "coupon_assignments", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "coupon_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coupon_id"], name: "index_coupon_assignments_on_coupon_id"
+    t.index ["user_id", "coupon_id"], name: "index_coupon_assignments_on_user_id_and_coupon_id", unique: true
+    t.index ["user_id"], name: "index_coupon_assignments_on_user_id"
+  end
+
+  create_table "coupons", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "discount_rate", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "delivery_addresses", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.string "postal_code", null: false
@@ -52,6 +70,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_15_055339) do
     t.index ["order_id"], name: "index_delivery_addresses_on_order_id"
   end
 
+  create_table "favorites", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "items", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.integer "price", null: false
@@ -62,13 +87,30 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_15_055339) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notices", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "used_point", default: 0, null: false
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "promotions", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -86,6 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_15_055339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin_flag"
+    t.integer "point", default: 0, null: false
     t.index ["admin_flag"], name: "index_users_on_admin_flag"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -93,7 +136,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_15_055339) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "coupon_assignments", "coupons"
+  add_foreign_key "coupon_assignments", "users"
   add_foreign_key "delivery_addresses", "orders"
+  add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "items"
   add_foreign_key "orders", "users"
 end

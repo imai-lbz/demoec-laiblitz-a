@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails";
 import "card"
 import "condition_search"
+import "order_price_calculator"

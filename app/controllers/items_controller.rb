@@ -32,11 +32,13 @@ class ItemsController < ApplicationController
     search_keyword = "%#{params[:q]}%"
     @items = Item.where('name LIKE ? OR description LIKE ?', search_keyword, search_keyword).order(created_at: :desc)
     render :index
+    @promotions = Promotion.all.order(updated_at: :desc)
+    @notices = Notice.all.order(created_at: :desc)
   end
 
   # 商品管理・一覧ページ
   def dashboard
-    @items = Item.all
+    @items = Item.order(updated_at: :desc)
     render 'items/dashboard'
   end
 
@@ -53,7 +55,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to dashboard_items_path, notice:
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

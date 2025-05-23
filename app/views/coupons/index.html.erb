@@ -1,0 +1,60 @@
+<%= render "shared/second-header" %>
+
+<div class="container">
+  <div class="card-layout">
+    <div class="card-header">
+      <h1 class="app-title">DemoEC クーポン管理</h1>
+    </div>
+
+    <div class="item-list-container">
+      <div class="item-list-header">
+        <div>
+          <h2 class="section-title">登録したクーポン一覧</h2>
+          <p class="section-description">
+            登録されているクーポンの一覧です。<%= @coupons.count %>個のクーポンが見つかりました。
+          </p>
+        </div>
+
+        <div class="list-header-actions">
+          <%= link_to 'クーポンを登録する', new_coupon_path, class: "new-item-button" %>
+        </div>
+      </div>
+
+      <%# todo: cssをクーポンテーブル用に作成したほうが良い。現時点では商品管理画面のcssを流用している %>
+      <div class="item-table">
+        <table>
+          <thead>
+            <tr>
+              <th>クーポン名</th>
+              <th>割引率</th>
+              <th>期限日</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @coupons.each do |coupon| %>
+              <tr>
+                <td class="item-col">
+                  <div class="item-info">
+                    <div class="item-details">
+                      <span class="item-name"><%= coupon.name %></span>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="price-col">
+                  <%= coupon.discount_rate %>％
+                </td>
+                
+                <td class="category-col">
+                <%= coupon.expires_at.strftime("%Y-%m-%d") %>
+                </td>
+                
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
