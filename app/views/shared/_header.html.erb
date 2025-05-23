@@ -39,6 +39,7 @@
               <% if current_user.admin? %>
                 <%= link_to 'ユーザー管理', users_path, class: "user-admin" %>
                 <%= link_to '商品管理', dashboard_items_path, class: "user-admin" %>
+                <%= link_to 'クーポン管理', coupons_path, class: "user-admin" %>
               <% end %>
               <%# 一般ユーザー限定のプルダウンメニュー %>
               <% if !current_user.admin? %>

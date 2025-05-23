@@ -22,4 +22,7 @@ Rails.application.routes.draw do
 
   # マイページ
   get 'mypage', to: 'users#show'
+  
+  # クーポン
+  resources :coupons, only:[:index, :new, :create]
 end
