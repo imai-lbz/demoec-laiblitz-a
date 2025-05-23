@@ -28,4 +28,7 @@ Rails.application.routes.draw do
 
   # プロモーション
   resources :promotions, only:[:index, :new, :create, :edit, :update, :destroy]
+
+  # お知らせ
+  resources :notices, only:[:index, :new, :create, :destroy]
 end
