@@ -24,26 +24,28 @@
       <div class="select-items">
         <div class="select-price">
           <div class="select-content">金額</div>
-          <% form_with url: "#", method: :get, local: true, class: 'price-filter-form' do |form| %>
             <div class="select-dropdown">
-              <%= form.label :min_price, "最小金額:" %>
-              <%= form.number_field :min_price, value: params[:min_price], min: 0 %>
+              <%= select_tag :price_range,
+                options_for_select([
+      ['〜1,000円', '0-1000'],
+      ['1,001円〜5,000円', '1001-5000'],
+      ['5,001円〜10,000円', '5001-10000'],
+      ['10,001円〜30,000円', '10001-30000'],
+      ['30,001円〜50,000円', '30001-50000'],
+      ['50,001円〜', '50001-'] 
+                ], params[:price_range]),
+                { prompt: '---', class: 'select-box', id: 'item-price-select'}
+              %>
             </div>
             <div class="select-dropdown">
-              <%= form.label :max_price, "最高金額:" %>
-              <%= form.number_field :max_price, value: params[:max_price], min: 0 %>
             </div>
-            <%= form.submit "検索", class: "visually-hidden-submit-button" %>
-            <% end %>
         </div>
         <div class="select-condition">
           <div class="select-content">商品の状態</div>
           <div class="select-dropdown">
-            <form action="#" method="get" id="filter-form">
-              <%= select_tag :condition_id,
-                            options_from_collection_for_select(Condition.all, :id, :name, params[:condition_id]),
-                            { prompt: '---', class: 'select-box', id: 'item-condition-select' } %>
-            </form>
+            <%= select_tag :condition_id,
+              options_from_collection_for_select(Condition.all, :id, :name, params[:condition_id]),
+              { prompt: '---', class: 'select-box', id: 'item-condition-select' } %>
           </div>
         </div>
       </div>
