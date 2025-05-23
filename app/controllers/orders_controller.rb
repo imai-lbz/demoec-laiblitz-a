@@ -6,23 +6,10 @@ class OrdersController < ApplicationController
   def index
     @item = Item.find_by(id: params[:item_id])
     if @item.present?
-      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-      gon.user_point = current_user.point
-      gon.item_price = @item.price
-      gon.user_coupons = current_user.coupon_assignments.includes(:coupon).each_with_object({}) do |assignment, hash|
-        hash[assignment.id] = assignment.coupon.discount_rate
-      end
-
+      assign_gon_data(@item)
       @order = Order.new(user: current_user, item: @item)
       @order.build_delivery_address
-      @coupon_options = current_user.coupon_assignments.includes(:coupon).map do |assignment|
-        coupon = assignment.coupon
-        label = []
-        label << coupon.name.presence
-        label << "#{coupon.discount_rate}%"
-        label << "#{coupon.expires_at.to_date}"
-        [label.compact.join(' / '), assignment.id] # ← valueはassignment.id
-      end
+      @coupon_options = build_coupon_options
 
     else
       flash.now[:alert] = '商品が見つかりません。'
@@ -63,32 +50,17 @@ class OrdersController < ApplicationController
   def render_index_with_item(status: :unprocessable_entity, alert: nil)
     @item = Item.find(params[:item_id])
     flash.now[:alert] = alert if alert.present?
-    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    gon.user_point = current_user.point
-    gon.item_price = @item.price
-    gon.user_coupons = current_user.coupon_assignments.includes(:coupon).index_with do |assignment|
-      assignment.coupon.discount_rate
-    end
-
-
+    assign_gon_data(@item)
     @order ||= Order.new(user: current_user, item: @item)
     @order.build_delivery_address unless @order.delivery_address
 
-    @coupon_options = current_user.coupon_assignments.includes(:coupon).map do |assignment|
-      coupon = assignment.coupon
-      label = []
-      label << coupon.name.presence
-      label << "#{coupon.discount_rate}%"
-      label << "#{coupon.expires_at.to_date}"
-      [label.compact.join(' / '), assignment.id] # ← valueはassignment.id
-    end
-
+    @coupon_options = build_coupon_options
     render :index, status: status
   end
 
   def order_params
     params.require(:order).permit(
-      :user_id, :used_point, :coupon_assignment_id,
+      :user_id, :used_point, :coupon_id,
       delivery_address_attributes: [
         :postal_code, :prefecture_id, :city, :address1, :building, :phone_number
       ]
@@ -96,16 +68,13 @@ class OrdersController < ApplicationController
   end
 
   def authenticate_non_admin!
-    # current_userがnilの場合はerrorが起きてしまうが、先にauthenticate_user!でnilかどうかを確認するようにする
     return unless current_user.admin?
 
-    # TODO: flashを表示する設定はしていない
     flash[:alert] = '一般ユーザーしか購入できません'
     redirect_to root_path
   end
 
   # 以下はcreateで使用するメソッドである
-
   def redirect_if_sold_out
     item = Item.find(params[:item_id])
     return unless item.sold_out?
@@ -121,9 +90,11 @@ class OrdersController < ApplicationController
   end
 
   def delete_used_coupon_assignment(order)
-    return if order.coupon_assignment.blank?
+    return if order.coupon_id.blank?
 
-    order.coupon_assignment.destroy
+    current_coupon_assignment = CouponAssignment.find_by(user_id: order.user_id, coupon_id: order.coupon_id)
+
+    current_coupon_assignment.destroy
   end
 
   def validate_used_point!(order)
@@ -135,8 +106,25 @@ class OrdersController < ApplicationController
   end
 
   def valid_coupon_assignment?(order)
-    return true if order.coupon_assignment_id.blank?
+    return true if order.coupon_id.blank?
 
-    current_user.coupon_assignments.exists?(id: order.coupon_assignment_id)
+    current_user.unexpired_coupon_assignments.exists?(coupon_id: order.coupon_id)
+  end
+
+  def assign_gon_data(item)
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
+    gon.user_point = current_user.point
+    gon.item_price = item.price
+    gon.user_coupons = current_user.unexpired_coupon_assignments.includes(:coupon).each_with_object({}) do |assignment, hash|
+      hash[assignment.coupon_id] = assignment.coupon.discount_rate
+    end
+  end
+
+  def build_coupon_options
+    current_user.unexpired_coupon_assignments.includes(:coupon).map do |assignment|
+      coupon = assignment.coupon
+      label = [coupon.name.presence, "#{coupon.discount_rate}%", coupon.expires_at.to_date].compact.join(' / ')
+      [label, coupon.id]
+    end
   end
 end

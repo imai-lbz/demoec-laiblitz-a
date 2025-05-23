@@ -22,4 +22,8 @@ class User < ApplicationRecord
   def admin?
     admin_flag
   end
+
+  def unexpired_coupon_assignments
+    coupon_assignments.joins(:coupon).where('coupons.expires_at >= ?', Time.current)
+  end
 end

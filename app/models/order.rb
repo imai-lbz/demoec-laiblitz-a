@@ -8,7 +8,8 @@ class Order < ApplicationRecord
 
   belongs_to :user
   belongs_to :item
-  belongs_to :coupon_assignment, optional: true
+  belongs_to :coupon, optional: true
+
 
   # orderを削除するとその子要素であるdelivery_addressが自動的に削除されるための設定である
   has_one :delivery_address, dependent: :destroy
@@ -16,7 +17,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :delivery_address
 
   def discount_rate
-    coupon_assignment&.coupon&.discount_rate || 0
+    coupon&.discount_rate || 0
   end
 
   def charge_amount

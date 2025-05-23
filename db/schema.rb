@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_21_021031) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_23_012847) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -93,6 +93,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_21_021031) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "used_point", default: 0, null: false
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -123,6 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_21_021031) do
   add_foreign_key "coupon_assignments", "coupons"
   add_foreign_key "coupon_assignments", "users"
   add_foreign_key "delivery_addresses", "orders"
+  add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "items"
   add_foreign_key "orders", "users"
 end
