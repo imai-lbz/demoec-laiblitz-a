@@ -1,9 +1,13 @@
 const search = () => {
   const items = gon.items;
   const conditionDropdown = document.getElementById("item-condition-select");
-  const priceDropdown = document.getElementById("item-price-select");
+  const priceMinDropdown = document.getElementById("item-min-price-select");
+  const priceMaxDropdown = document.getElementById("item-max-price-select");
   const productsGrid = document.getElementById("products-grid");
-  if (!conditionDropdown || !productsGrid || !priceDropdown) return;
+  console.log(priceMaxDropdown)
+  if (!conditionDropdown || !productsGrid || !priceMinDropdown || !priceMaxDropdown) return;
+
+  console.log("a")
 
   const filterCondition = (items,selectedConditionId) => {
     let filteredItems = [];
@@ -17,13 +21,27 @@ const search = () => {
     return filteredItems;
   }
 
-  const filterPrice = (items,price) => {
+  const filterMinPrice = (items,minPrice) => {
     let filteredItems = [];
-    if (price === "") {
+    if (minPrice === "") {
       filteredItems = items;
     } else {
+      minPrice = parseInt(minPrice, 10);
       filteredItems = items.filter(item => {
-        return item.price < price;
+        return item.price >= minPrice;
+      });
+    }
+    return filteredItems;
+  }
+
+  const filterMaxPrice = (items,maxPrice) => {
+    let filteredItems = [];
+    if (maxPrice === "") {
+      filteredItems = items;
+    } else {
+      maxPrice = parseInt(maxPrice, 10);
+      filteredItems = items.filter(item => {
+        return item.price <= maxPrice;
       });
     }
     return filteredItems;
@@ -53,11 +71,17 @@ const search = () => {
   const filterAndDisplayItems = () => {
     productsGrid.innerHTML = '';
     const selectedConditionId = conditionDropdown.value;
-    console.log(priceDropdown.value)
+    const selectedMinPrice = priceMinDropdown.value;
+    const selectedMaxPrice = priceMaxDropdown.value;
+    // console.log(priceDropdown.value)
 
-    let filteredItems = filterCondition(items,selectedConditionId);
-    filteredItems = filterPrice(filteredItems,priceDropdown.value);
+    let filteredItems = items;
 
+    filteredItems = filterCondition(filteredItems,selectedConditionId);
+    filteredItems = filterMinPrice(filteredItems,priceMinDropdown.value);
+    filteredItems = filterMaxPrice(filteredItems,priceMaxDropdown.value);
+
+    console.log("最終的に絞り込まれた商品データ:", filteredItems);
 
     if (filteredItems.length > 0) {
       filteredItems.forEach(item => {
@@ -76,7 +100,8 @@ const search = () => {
   };
 
   conditionDropdown.addEventListener("change", filterAndDisplayItems);
-  priceDropdown.addEventListener("change", filterAndDisplayItems);
+  priceMinDropdown.addEventListener("change", filterAndDisplayItems);
+  priceMaxDropdown.addEventListener("change", filterAndDisplayItems);
 
 };
 
