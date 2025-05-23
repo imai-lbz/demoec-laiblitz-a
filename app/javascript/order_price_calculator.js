@@ -3,9 +3,9 @@ const point = () => {
   const applyPointBtn        = document.querySelector(".apply-point-btn");
   const pointInput           = document.getElementById("used-point-input");
   const hiddenUsedPointInput = document.getElementById("order_used_point");
-  const hiddenCouponAssignmentID = document.getElementById("order_coupon_assignment_id");
+  const hiddenCouponID = document.getElementById("order_coupon_id");
   const couponSelect         = document.getElementById("coupon-select");
-  if (!applyPointBtn || !pointInput || !hiddenUsedPointInput || !couponSelect || !hiddenCouponAssignmentID) return;// ボタンが存在しなければ終了
+  if (!applyPointBtn || !pointInput || !hiddenUsedPointInput || !couponSelect || !hiddenCouponID) return;// ボタンが存在しなければ終了
 
   const userPoint   = gon.user_point;
   const itemPrice   = gon.item_price;
@@ -41,7 +41,7 @@ const point = () => {
 
     document.querySelector(".summary-row.total span:last-child").textContent = `¥${finalPrice}`;
     hiddenUsedPointInput.value     = usedPoint;
-    hiddenCouponAssignmentID.value = selectedCouponAssignmentId;
+    hiddenCouponID.value = selectedCouponAssignmentId;
     pointInput.value               = usedPoint;
   };
 
