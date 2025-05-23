@@ -27,5 +27,5 @@ Rails.application.routes.draw do
   resources :coupons, only:[:index, :new, :create]
 
   # プロモーション
-  resources :promotions, only:[:index, :new]
+  resources :promotions, only:[:index, :new, :create, :edit, :update, :destroy]
 end

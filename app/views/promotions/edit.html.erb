@@ -1,0 +1,18 @@
+<%# cssは商品出品のものを併用しています。
+app/assets/stylesheets/items/form.css %>
+
+<div class="create-listing-page">
+  <div class="container">
+    <div class="form-container">
+      <header class="form-header">
+        <div class="header-logo-section">
+          <%= link_to image_tag('logo.svg', class: 'logo-icon'), root_path, class: 'logo-link' %>
+        </div>
+      </header>
+      <div class="form-main">
+        <h2 class="form-title">プロモーションの情報を入力</h2>
+          <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<%= form_with model: @promotion, local: true do |f| %>
+<%= form_with model: @promotion, local: true, html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', model: f.object %>
 
   <div class="img-upload">
@@ -6,8 +6,13 @@
       プロモーション画像 <span class="required-badge">必須</span>
     </div>
     <div class="click-upload">
-      <%= f.label :image, 'クリックしてファイルをアップロード', class: 'upload-label' %>
-      <%= f.file_field :image, id: 'item-image', class: 'file-input' %>
+      <% if @promotion.image.attached? %>
+        <%= f.label :image, 'クリックしてファイルを再アップロード', class: 'upload-label' %><br>
+        <%= f.file_field :image, id: 'item-image', class: 'file-input' %>
+      <% else %>
+        <%= f.label :image, 'クリックしてファイルをアップロード', class: 'upload-label' %><br>
+        <%= f.file_field :image, id: 'item-image', class: 'file-input' %>
+      <% end %>
     </div>
   </div>
 
@@ -22,7 +27,7 @@
     <div class="form-group">
       <div class="items-explain">
         <div class="weight-bold-text">
-          プロモーションの説明 <span class="required-badge">必須</span>
+          プロモーションの内容 <span class="required-badge">必須</span>
         </div>
         <%= f.text_area :content, class: "items-text", id: "item-description", placeholder: "プロモーションの説明（必須 1,000文字まで）", rows: "7", maxlength: "1000" %>
       </div>
@@ -30,9 +35,8 @@
   </div>
 
   <div class="form-actions">
-    <%# f.submit "出品する", class: "submit-button" %>
     <%= f.submit @promotion.persisted? ? "更新" : "登録する", class: "submit-button" %>
-    <%= link_to 'もどる', dashboard_items_path, class: "cancel-button" %>
+    <%= link_to 'もどる', promotions_path, class: "cancel-button" %>
   </div>
 <% end %>
 

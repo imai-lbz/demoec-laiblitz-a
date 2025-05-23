@@ -26,8 +26,9 @@
           <thead>
             <tr>
               <th>プロモーション名</th>
-              <th>割引率</th>
-              <th>期限日</th>
+              <th>内容</th>
+              <th>更新日</th>
+              <th>アクション</th>
             </tr>
           </thead>
 
@@ -53,6 +54,13 @@
                 
                 <td class="category-col">
                 <%= promotion.created_at.strftime("%Y-%m-%d") %>
+                </td>
+
+                <td class="actions-col">
+                  <%= link_to '編集', edit_promotion_path(promotion), class: "admin-action-button" %>
+                  <%= form_tag(promotion_path(promotion), method: :delete, data: { turbo: false }) do %>
+                    <%= button_tag '削除', class: "admin-action-button" %>
+                  <% end %>
                 </td>
                 
               </tr>
