@@ -231,6 +231,11 @@ img {
   gap: 20px;
 }
 
+.user-info {
+  /* display: flex; */
+  flex-flow: column;
+}
+
 .user-dropdown {
   position: relative;
 }

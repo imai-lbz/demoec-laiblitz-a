@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     # ログイン中のユーザーがお気に入り登録した商品一覧を取得
     favorite_item_ids = @user.favorites.pluck(:item_id)
     @items = Item.where(id: favorite_item_ids)
+    @orders = Order.order(created_at: :desc)
   end
 
   def destroy
