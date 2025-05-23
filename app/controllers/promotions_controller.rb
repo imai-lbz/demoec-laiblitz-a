@@ -32,7 +32,7 @@ class PromotionsController < ApplicationController
 
   def destroy
     promotion = Promotion.find_by(id: params[:id])
-    if user
+    if promotion
       promotion.destroy
       redirect_to promotions_path, notice: "#{promotion.title} を削除しました。"
     else

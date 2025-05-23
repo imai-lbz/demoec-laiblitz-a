@@ -17,6 +17,16 @@ class NoticesController < ApplicationController
     end
   end
 
+  def destroy
+    notice = Notice.find_by(id: params[:id])
+    if notice
+      notice.destroy
+      redirect_to notices_path, notice: "#{notice.title} を削除しました。"
+    else
+      redirect_to notices_path, alert: '指定されたユーザーは存在しません。'
+    end
+  end
+
   private
 
   def notice_params
