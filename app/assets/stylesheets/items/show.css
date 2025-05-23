@@ -192,14 +192,18 @@
 }
 
 
-/* クーポンカード全体（商品カードのgridと同様） */
+/* マイページ */
+.mypage-container {
+  margin-top: 30px;
+}
+
 .coupons-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: var(--spacing-lg);
+  margin-bottom: 70px;
 }
 
-/* クーポンカード（商品カードに近い構造） */
 .coupon-card {
   display: flex;
   flex-direction: column;
@@ -207,22 +211,19 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
-  background-color: #fdfdfd;
+  background-color: white;
 }
 
-/* クーポン本文 */
 .coupon-content {
   padding: var(--spacing-md);
 }
 
-/* タイトル */
 .coupon-title {
   font-size: var(--font-size-lg);
   font-weight: 600;
   margin-bottom: var(--spacing-sm);
 }
 
-/* 割引・有効期限情報 */
 .coupon-details {
   font-size: var(--font-size-sm);
   color: var(--color-text-light);
@@ -231,7 +232,7 @@
   gap: var(--spacing-xs);
 }
 
-.coupon-discount,
-.coupon-expiry {
-  line-height: 1.4;
+/* マイページのお気に入り商品 */
+.favorite_items {
+  padding-bottom: 70px;
 }
