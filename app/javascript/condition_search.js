@@ -1,9 +1,10 @@
 const search = () => {
   const items = gon.items;
   const conditionDropdown = document.getElementById("item-condition-select");
+  const priceDropdown = document.getElementById("item-price-select");
   const productsGrid = document.getElementById("products-grid");
+  if (!conditionDropdown || !productsGrid || !priceDropdown) return;
 
-  if (!conditionDropdown || !productsGrid) return;
   const filterCondition = (items,selectedConditionId) => {
     let filteredItems = [];
     if (selectedConditionId === "") {
@@ -11,6 +12,18 @@ const search = () => {
     } else {
       filteredItems = items.filter(item => {
         return item.condition_id.toString() === selectedConditionId;
+      });
+    }
+    return filteredItems;
+  }
+
+  const filterPrice = (items,price) => {
+    let filteredItems = [];
+    if (price === "") {
+      filteredItems = items;
+    } else {
+      filteredItems = items.filter(item => {
+        return item.price < price;
       });
     }
     return filteredItems;
@@ -40,8 +53,11 @@ const search = () => {
   const filterAndDisplayItems = () => {
     productsGrid.innerHTML = '';
     const selectedConditionId = conditionDropdown.value;
+    console.log(priceDropdown.value)
 
     let filteredItems = filterCondition(items,selectedConditionId);
+    filteredItems = filterPrice(filteredItems,priceDropdown.value);
+
 
     if (filteredItems.length > 0) {
       filteredItems.forEach(item => {
@@ -60,6 +76,7 @@ const search = () => {
   };
 
   conditionDropdown.addEventListener("change", filterAndDisplayItems);
+  priceDropdown.addEventListener("change", filterAndDisplayItems);
 
 };
 
