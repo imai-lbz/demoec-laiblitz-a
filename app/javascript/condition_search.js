@@ -25,17 +25,27 @@ const search = () => {
         filteredItems.forEach(item => {
           const itemElement = document.createElement('div');
           itemElement.classList.add('product-item');
-          itemElement.innerHTML = `
-              <div class="product-image-container">
-          <img class="product-image" src="${item.image_url}" alt="${item.name}">
-        </div>
-        <div class="product-content">
-          <div class="product-category">${item.category_name || 'その他'}</div> <h3 class="product-name">${item.name}</h3>
-        </div>
-        <div class="product-footer">
-          <div class="product-price">&yen;${item.price}</div>
-        </div>
-      `;
+          const linkElement = document.createElement('a');
+          linkElement.href = `/items/${item.id}`; 
+          linkElement.classList.add('product-item-link');
+          let soldOutBadgeHtml = '';
+          if (item.is_sold_out) {
+            soldOutBadgeHtml = '<div class="sold-out-badge">在庫なし</div>';
+          }
+          linkElement.innerHTML = `
+            <div class="product-image-container">
+              <img class="product-image" src="${item.image_url}" alt="${item.name}">
+              ${soldOutBadgeHtml}
+            </div>
+            <div class="product-content">
+              <div class="product-category">${item.category_name || 'その他'}</div>
+              <h3 class="product-name">${item.name}</h3>
+            </div>
+            <div class="product-footer">
+              <div class="product-price">&yen;${item.price}</div>
+            </div>
+          `;
+          itemElement.appendChild(linkElement);
           productsGrid.appendChild(itemElement);
         });
       } else {

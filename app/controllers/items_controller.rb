@@ -17,7 +17,8 @@ class ItemsController < ApplicationController
         condition_name: item.condition&.name,
         category_id: item.category_id,
         category_name: item.category&.name,
-        image_url: item.image.attached? ? url_for(item.image) : nil
+        image_url: item.image.attached? ? url_for(item.image) : nil,
+        is_sold_out: item.sold_out?
       }
     end
   end
