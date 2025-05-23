@@ -16,7 +16,7 @@
         </div>
 
         <div class="list-header-actions">
-          <%= link_to 'お知らせを登録する', new_promotion_path, class: "new-item-button" %>
+          <%= link_to 'お知らせを登録する', new_notice_path, class: "new-item-button" %>
         </div>
       </div>
 
@@ -33,31 +33,23 @@
           </thead>
 
           <tbody>
-            <% @notices.each do |promotion| %>
+            <% @notices.each do |notice| %>
               <tr>
-                <td class="item-col">
-                  <div class="item-info">
-                    <div class="item-avatar">
-                      <div>
-                        <%= image_tag promotion.image, class: "item-image" %>
-                      </div>
-                    </div>
-                    <div class="item-details">
-                      <span class="item-name"><%= promotion.title %></span>
-                    </div>
-                  </div>
+
+                <td class="price-col">
+                  <%= notice.title %>
                 </td>
 
                 <td class="price-col">
-                  <%= promotion.content %>
+                  <%= notice.content %>
                 </td>
                 
                 <td class="category-col">
-                <%= promotion.created_at.strftime("%Y-%m-%d") %>
+                <%= notice.created_at.strftime("%Y-%m-%d") %>
                 </td>
 
                 <td class="actions-col">
-                  <%= form_tag(notice_path(promotion), method: :delete, data: { turbo: false }) do %>
+                  <%= form_tag(notice_path(notice), method: :delete, data: { turbo: false }) do %>
                     <%= button_tag '削除', class: "admin-action-button" %>
                   <% end %>
                 </td>

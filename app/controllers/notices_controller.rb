@@ -8,7 +8,7 @@ class NoticesController < ApplicationController
   end
 
   def create
-    @notice = Notice.new(promotion_params)
+    @notice = Notice.new(notice_params)
 
     if @notice.save
       redirect_to notices_path, notice: 'プロモーションが作成されました。'
