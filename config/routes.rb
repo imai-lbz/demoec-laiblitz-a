@@ -8,15 +8,21 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
 
+  # ユーザー認証
   devise_for :users, controllers: {
     registrations: 'devise_user'
   }
 
+  # ユーザー管理
   resources :users, only: [:index, :destroy] do
     collection do
       get "admin_new"
     end
   end
 
+  # マイページ
+  get 'mypage', to: 'users#show'
+  
+  # クーポン
   resources :coupons, only:[:index, :new, :create]
 end

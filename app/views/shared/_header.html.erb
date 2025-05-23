@@ -19,16 +19,33 @@
 
       <div class="user-menu">
         <% if user_signed_in? %>
+          <%# マイページ用のポイント表示 %>
+          <% if request.path == mypage_path %>
+            <div clas="mypage-point">
+              <div class="mypage-point-icon">
+                <i class="fab fa-product-hunt"></i>
+                <div class="mypage-point-word">所持ポイント</div>
+              </div>
+              <div class="mypage-point-num">
+                <%= point %> pt
+              </div>
+            </div>
+          <% end %>
+
           <div class="user-dropdown">
             <%= link_to "#{current_user.nickname}さん", "#", class: 'user-nickname' %>
             <div class="dropdown-content">
+              <%# 管理者ユーザー限定のプルダウンメニュー %>
               <% if current_user.admin? %>
                 <%= link_to 'ユーザー管理', users_path, class: "user-admin" %>
                 <%= link_to '商品管理', dashboard_items_path, class: "user-admin" %>
                 <%= link_to 'クーポン管理', coupons_path, class: "user-admin" %>
               <% end %>
-      
-              <%# link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "logout" %>
+              <%# 一般ユーザー限定のプルダウンメニュー %>
+              <% if !current_user.admin? %>
+                <%= link_to "マイページ", mypage_path, class: "logout" %>
+              <% end %>
+              <%# 共通のプルダウンメニュー %>
               <%= form_tag(destroy_user_session_path, method: :delete) do %>
                 <%= button_tag 'ログアウト', class: "logout" %>
               <% end %>
@@ -39,7 +56,6 @@
           <%= link_to '新規登録', new_user_registration_path, class: "sign-up" %>
         <% end %>
       </div>    
-      <%# //deviseを導入できたら、ログインの有無で表示が変わるように分岐しましょう%>
     </div>
   </div>
 

@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!,       only: [:index, :destroy]
+  before_action :authenticate_user!,       only: [:index, :destroy, :show]
   before_action :authenticate_admin_user!, only: [:index, :destroy]
   before_action :basic_auth, only: [:admin_new]
 
   def index
-    @users = User.all
+    @users = User.order(created_at: :desc)
     render 'admin_users/index'
+  end
+
+  def show
+    @user = current_user
+    # ログイン中のユーザーがお気に入り登録した商品一覧を取得
+    favorite_item_ids = @user.favorites.pluck(:item_id)
+    @items = Item.where(id: favorite_item_ids)
+    @orders = Order.order(created_at: :desc)
   end
 
   def destroy

@@ -1,0 +1,65 @@
+<%= render "shared/header", point: @user.point %>
+
+<div class="home-page">
+  <%= render "items/products", items: @items, title: "お気に入り商品", show_link: false %>
+</div>
+
+<div class="container">
+  <div class="card-layout">
+    <div class="card-header">
+      <h1 class="app-title">購入履歴</h1>
+    </div>
+
+    <div class="item-list-container">
+      <div class="item-table">
+        <table>
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>価格</th>
+              <th>カテゴリー</th>
+              <th>購入日</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @orders.each do |order| %>
+              <tr>
+                <td class="item-col">
+                  <div class="item-info">
+                    <div class="item-avatar">
+                      <div>
+                        <%= image_tag order.item.image, class: "item-image" %>
+                        <% if order.item.sold_out? %>
+                          <div class="sold-out">
+                            <span>在庫なし</span>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="item-details">
+                      <%= link_to order.item.name, item_path(order.item), class: "item-name" %>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="price-col">
+                  <%= order.item.price %>円
+                </td>
+                <td class="category-col">
+                  <%= order.item.category.name %>
+                </td>
+                <td class="date-col">
+                  <%= order.created_at.strftime("%Y-%m-%d") %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render "shared/footer" %>

@@ -154,22 +154,39 @@
   color: white;
 }
 
-/* お気に入り機能 */
+/* 商品詳細用のハートマーク */
 .like-btn {
+  font-size: 5vw !important;
+  color: #e54747;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+.unlike-btn {
   font-size: 5vw !important;
   color: #808080; 
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
   z-index: 10;
 }
 
-.unlike-btn {
-  font-size: 5vw !important;
+/* 商品一覧用のハートマーク */
+.like-btn_products {
+  font-size: 30px !important;
   color: #e54747;
-  position: absolute;
-  top: 20px;
-  right: 20px;
   z-index: 10;
- }
+  position: absolute;
+  bottom: 150px;
+  right: 10px;
+}
 
+.unlike-btn_products {
+  font-size: 30px !important;
+  color: #808080; 
+  z-index: 10;
+  position: absolute;
+  bottom: 150px;
+  right: 10px;
+}

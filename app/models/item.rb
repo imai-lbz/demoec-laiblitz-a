@@ -20,7 +20,8 @@ class Item < ApplicationRecord
 
   # ユーザーがいいね済みかどうかを判定する関数
   def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+    # &を入れることでユーザーがnilの時はidを取得しない
+    favorites.exists?(user_id: user&.id)
   end
 
   def sold_out?
