@@ -155,18 +155,17 @@
 }
 
 /* お気に入り機能 */
-.unlike-btn {
+.like-btn {
   font-size: 5vw !important;
-  color: #808080; 
+  color: #e54747;
   position: absolute;
   bottom: 20px;
   right: 20px;
   z-index: 10;
 }
-
-.like-btn {
+.unlike-btn {
   font-size: 5vw !important;
-  color: #e54747;
+  color: #808080; 
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -179,6 +178,15 @@
   color: #e54747;
   z-index: 10;
   position: absolute;
-  bottom: 0;
-  right: 20px;
+  bottom: 150px;
+  right: 10px;
+}
+
+.unlike-btn_products {
+  font-size: 30px !important;
+  color: #808080; 
+  z-index: 10;
+  position: absolute;
+  bottom: 150px;
+  right: 10px;
 }

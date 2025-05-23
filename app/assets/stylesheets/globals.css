@@ -581,6 +581,11 @@ img {
   gap: var(--spacing-lg);
 }
 
+.product-card-container {
+  position: relative;
+  display: inline-block;
+}
+
 .product-card {
   display: flex;
   flex-direction: column;

@@ -9,24 +9,27 @@
     <div class="products-grid">
       <% if items.any? %>
         <% items.each do |item| %>
-          <%= link_to  item_path(item), class: 'product-card' do %>
-          <div class="product-image-container">
+          <div class="product-card-container">
             <%= render "favorites/btn_for_products", item: item %>
-            <%= image_tag item.image, class: 'product-image' %>
-            <% if item.sold_out? %>
-              <div class="sold-out-badge">
-                <span>在庫なし</span>
+
+            <%= link_to  item_path(item), class: 'product-card' do %>
+              <div class="product-image-container">
+                <%= image_tag item.image, class: 'product-image' %>
+                <% if item.sold_out? %>
+                  <div class="sold-out-badge">
+                    <span>在庫なし</span>
+                  </div>
+                <% end %>
+              </div>
+              <div class="product-content">
+                <div class="product-category"><%= item.category.name  %></div>
+                <h3 class="product-name"><%= item.name  %></h3>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">¥<%= item.price  %></div>
               </div>
             <% end %>
           </div>
-          <div class="product-content">
-            <div class="product-category"><%= item.category.name  %></div>
-            <h3 class="product-name"><%= item.name  %></h3>
-          </div>
-          <div class="product-footer">
-            <div class="product-price">¥<%= item.price  %></div>
-          </div>
-          <% end %>
         <% end %>
       <% else%>
         <%# ダミー商品表示 %>
