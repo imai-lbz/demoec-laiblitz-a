@@ -49,7 +49,7 @@
                 </td>
 
                 <td class="price-col">
-                  <%= promotion.content %>％
+                  <%= promotion.content %>
                 </td>
                 
                 <td class="category-col">
@@ -68,6 +68,15 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div class="item-list-container">
+      <div class="item-list-header">
+        <div>
+          <h2 class="section-title">登録されているプロモーションの表示例</h2>
+        </div>
+      </div>
+      <%= render partial: 'promotions/banner_scroll', locals: { promotions: @promotions } %>
     </div>
   </div>
 </div>

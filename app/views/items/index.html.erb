@@ -12,6 +12,7 @@
       </div>
     </div>
   </section>
+  <%= render partial: 'promotions/banner_scroll', locals: { promotions: @promotions } %>
   <%= render "products", items: @items, title: "新着商品", show_link: true %>
 </div>
 
