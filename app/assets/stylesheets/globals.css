@@ -231,11 +231,6 @@ img {
   gap: 20px;
 }
 
-.user-info {
-  /* display: flex; */
-  flex-flow: column;
-}
-
 .user-dropdown {
   position: relative;
 }
@@ -246,6 +241,35 @@ img {
   font-weight: 500;
   padding: 8px 0;
   display: inline-block;
+}
+
+.mypage-point {
+  flex-flow: column;
+}
+
+.mypage-point-icon {
+  display: flex;
+  margin-top: 5px;
+}
+
+.fa-product-hunt {
+  font-size: 20px !important;
+  color: #333; 
+}
+
+.mypage-point-word {
+  font-size: 12px;
+  color: #333;
+  font-weight: 500;
+  padding-left: 5px;
+}
+
+.mypage-point-num {
+  color: #333;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  float: right;
 }
 
 .user-nickname:hover {
