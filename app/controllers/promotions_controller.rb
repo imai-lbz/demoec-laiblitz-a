@@ -1,6 +1,6 @@
 class PromotionsController < ApplicationController
   def index
-    @promotions = Promotion.all.order(created_at: :desc)
+    @promotions = Promotion.all.order(updated_at: :desc)
   end
 
   def new
@@ -17,11 +17,6 @@ class PromotionsController < ApplicationController
     end
   end
 
-  # def edit
-  #   @promotion = Promotion.find(params[:id])
-
-  # end
-  # PromotionsController
   def edit
     @promotion = Promotion.includes(image_attachment: :blob).find(params[:id])
   end
@@ -37,7 +32,7 @@ class PromotionsController < ApplicationController
 
   def destroy
     promotion = Promotion.find_by(id: params[:id])
-    if user
+    if promotion
       promotion.destroy
       redirect_to promotions_path, notice: "#{promotion.title} を削除しました。"
     else
