@@ -199,7 +199,7 @@ img {
   position: relative;
 }
 
-.search-icon {
+.fa-search {
   position: absolute;
   left: var(--spacing-sm);
   top: 50%;

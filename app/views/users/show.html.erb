@@ -1,5 +1,52 @@
 <%= render "shared/header", point: @user.point %>
 
+
+<div class="container">
+  <div class="card-layout">
+    <div class="card-header">
+      <h1 class="app-title">所有クーポン</h1>
+    </div>
+
+      <%# todo: cssをクーポンテーブル用に作成したほうが良い。現時点では商品管理画面のcssを流用している %>
+      <div class="item-table">
+        <table>
+          <thead>
+            <tr>
+              <th>クーポン名</th>
+              <th>割引率</th>
+              <th>期限日</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @coupons.each do |coupon| %>
+              <tr>
+                <td class="item-col">
+                  <div class="item-info">
+                    <div class="item-details">
+                      <span class="item-name"><%= coupon.name %></span>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="price-col">
+                  <%= coupon.discount_rate %>％
+                </td>
+                
+                <td class="category-col">
+                <%= coupon.expires_at.strftime("%Y-%m-%d") %>
+                </td>
+                
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="home-page">
   <%= render "items/products", items: @items, title: "お気に入り商品", show_link: false %>
 </div>
@@ -60,6 +107,5 @@
     </div>
   </div>
 </div>
-
 
 <%= render "shared/footer" %>
