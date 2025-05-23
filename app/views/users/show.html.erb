@@ -1,5 +1,18 @@
 <%= render "shared/header", point: @user.point %>
 
+<div class="coupons-grid">
+  <% @coupons.each do |coupon| %>
+    <div class="coupon-card">
+      <div class="coupon-content">
+        <div class="coupon-title"><%= coupon.name %></div>
+        <div class="coupon-details">
+          <span class="coupon-discount">割引率：<%= coupon.discount_rate %>%</span>
+          <span class="coupon-expiry">有効期限：<%= coupon.expires_at.strftime('%Y-%m-%d') %></span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <div class="container">
   <div class="card-layout">

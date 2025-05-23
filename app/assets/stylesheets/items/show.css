@@ -190,3 +190,48 @@
   bottom: 150px;
   right: 10px;
 }
+
+
+/* クーポンカード全体（商品カードのgridと同様） */
+.coupons-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-lg);
+}
+
+/* クーポンカード（商品カードに近い構造） */
+.coupon-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: #fdfdfd;
+}
+
+/* クーポン本文 */
+.coupon-content {
+  padding: var(--spacing-md);
+}
+
+/* タイトル */
+.coupon-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 割引・有効期限情報 */
+.coupon-details {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.coupon-discount,
+.coupon-expiry {
+  line-height: 1.4;
+}
