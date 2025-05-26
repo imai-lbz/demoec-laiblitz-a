@@ -101,25 +101,36 @@ const search = () => {
   }
 
   const buildHtml = (item) => {
-    let soldOutBadgeHtml = '';
-      if (item.is_sold_out) {
-        soldOutBadgeHtml = '<div class="sold-out-badge">在庫なし</div>';
-      }
-    let html  = `
+    let favoriteFrameHtml = '';
+    console.log(gon.current_user)
+
+    // ユーザーがログインしていて、かつ管理者でないときだけハートを表示
+    if (gon.current_user && !gon.current_user.admin_flag) {
+      favoriteFrameHtml = `
+        <turbo-frame id="favorite_item_${item.id}" src="/items/${item.id}/favorite_frame">
+          <div class="loading">♡ 読み込み中</div>
+        </turbo-frame>
+      `;
+    }
+
+    return `
+        ${favoriteFrameHtml}
+        <a class="product-card" href="/items/${item.id}">
           <div class="product-image-container">
             <img class="product-image" src="${item.image_url}" alt="${item.name}">
-            ${soldOutBadgeHtml}
+            ${item.is_sold_out ? '<div class="sold-out-badge"><span>在庫なし</span></div>' : ''}
           </div>
           <div class="product-content">
-            <div class="product-category">${item.category_name || 'その他'}</div>
+            <div class="product-category">${item.category_name}</div>
             <h3 class="product-name">${item.name}</h3>
           </div>
           <div class="product-footer">
-            <div class="product-price">&yen;${item.price}</div>
+            <div class="product-price">¥${item.price}</div>
           </div>
-        `;
-    return html
-  }
+        </a>
+    `;
+  };
+
 
   const filterAndDisplayItems = () => {
     productsGrid.innerHTML = '';
@@ -136,13 +147,11 @@ const search = () => {
     if (filteredItems.length > 0) {
       filteredItems.forEach(item => {
         const itemElement = document.createElement('div');
-        itemElement.classList.add('product-item');
-        const linkElement = document.createElement('a');
-        linkElement.href = `/items/${item.id}`; 
-        linkElement.classList.add('product-item-link');
-        linkElement.innerHTML = buildHtml(item)
-        itemElement.appendChild(linkElement);
-        productsGrid.appendChild(itemElement);
+    itemElement.classList.add('product-card-container'); // ✅ ここを統一
+
+    itemElement.innerHTML = buildHtml(item); // ❌ <a> は buildHtml() の中だけに
+    productsGrid.appendChild(itemElement);
+
       });
     } else {
       productsGrid.innerHTML = '<p>該当する商品はありません。</p>';

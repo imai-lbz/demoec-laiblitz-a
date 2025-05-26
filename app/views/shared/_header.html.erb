@@ -32,7 +32,7 @@
         <i class="fas fa-search"></i>
         <%= form_with url: search_path, method: :get, local: true, class: "search-form" do |form| %>
         <%# form_with url: search_items_path, method: :get, scope: nil, local: true, class: "search-form" do |form| %>
-          <%= form.search_field :q, placeholder: "商品を検索...", class: "search-input" %>
+          <%= form.search_field :q, placeholder: "商品を検索...", value: @search_keyword , class: "search-input" %>
           <%= form.submit "検索", class: "visually-hidden-submit-button" %>
         <% end %>
       </div>

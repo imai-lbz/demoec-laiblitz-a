@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     end
     resources :orders, only: [:index, :create]
     resource :favorites, only: [:create, :destroy]
+    member do
+      get :favorite_frame
+    end
   end
 
   # ユーザー認証
