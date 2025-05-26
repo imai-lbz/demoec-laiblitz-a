@@ -442,6 +442,7 @@ img {
   flex-direction: column;
   gap: var(--spacing-2xl);
   padding-bottom: var(--spacing-xl);
+  display: flex;
 }
 
 /* ヒーローセクション */
@@ -531,6 +532,8 @@ img {
 .featured-products-section {
   max-width: var(--container-width);
   padding: 0 var(--spacing-lg) 0 calc(var(--spacing-2xl) + 0.5rem);;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-header {
@@ -1222,8 +1225,9 @@ img {
 /* 以下は勝手に追加した */
 .notice-table {
   margin: 0 auto;
-  width: 700px;
+  width: 864px;
   overflow-x: auto;
+  padding-left: 65px;
 }
 
 .notice-table table {
@@ -1242,7 +1246,7 @@ img {
 }
 
 .notice-table th {
-  background-color: var(--color-secondary);
+  background-color: #ffffff;
   font-weight: 600;
 }
 
@@ -1282,4 +1286,27 @@ img {
 #slider .noUi-handle::before,
 #slider .noUi-handle:after {
   display: none;
+}
+
+.title-col-text{
+  background-color: bisque;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.title-col{
+  width: 150px;
+}
+
+.content-col{
+  font-weight: bold;
+}
+
+.date-col{
+  width: 120px;
+}
+
+.news-contents-layout{
+  padding: 100px 0 70px 130px;
+
 }
