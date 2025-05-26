@@ -3,13 +3,12 @@ class ItemsController < ApplicationController
   # TODO: 管理者ユーザーで実際に挙動を確認する必要がある
   before_action :authenticate_user!,       only: [:new, :edit, :dashboard, :destroy]
   before_action :authenticate_admin_user!, only: [:new, :edit, :dashboard, :destroy]
+  before_action :set_promotions_and_notices, only: [:index, :category_index, :search]
 
   # トップページ
   def index
     @items = Item.order(created_at: :desc)
     @items = @items.where(condition_id: params[:condition_id]) if params[:condition_id].present?
-    @promotions = Promotion.all.order(updated_at: :desc)
-    @notices = Notice.all.order(created_at: :desc)
     gon.items = @items.map do |item|
       {
         id: item.id,
@@ -34,8 +33,6 @@ class ItemsController < ApplicationController
     search_keyword = "%#{params[:q]}%"
     @items = Item.where('name LIKE ? OR description LIKE ?', search_keyword, search_keyword).order(created_at: :desc)
     render :index
-    @promotions = Promotion.all.order(updated_at: :desc)
-    @notices = Notice.all.order(created_at: :desc)
   end
 
   # 商品管理・一覧ページ
@@ -84,5 +81,10 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :description, :category_id, :condition_id, :price, :image)
+  end
+
+  def set_promotions_and_notices
+    @promotions = Promotion.order(updated_at: :desc)
+    @notices = Notice.order(created_at: :desc)
   end
 end
