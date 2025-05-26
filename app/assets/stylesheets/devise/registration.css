@@ -93,7 +93,7 @@ body {
 }
 
 .required-badge {
-  background-color: var(--danger-color);
+  background-color: var(--color-primary-dark);
   color: white;
   font-size: 12px;
   padding: 2px 8px;
@@ -221,7 +221,7 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
   color: white;
 }
 

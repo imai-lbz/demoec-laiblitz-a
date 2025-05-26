@@ -230,7 +230,7 @@
 }
 
 .required-badge {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
   color: white;
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-sm);
