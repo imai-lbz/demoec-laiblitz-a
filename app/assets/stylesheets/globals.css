@@ -254,6 +254,9 @@ img {
 .user-dropdown {
   position: relative;
 }
+.user-dropdown, .dropdown-content {
+  background-color: #232F3E !important;
+}
 
 .user-nickname {
   color: #ffffff;
@@ -277,18 +280,18 @@ img {
 
 .fa-product-hunt {
   font-size: 20px !important;
-  color: #333; 
+  color: #fff; 
 }
 
 .mypage-point-word {
   font-size: 12px;
-  color: #333;
+  color: #fff;
   font-weight: 500;
   padding-left: 5px;
 }
 
 .mypage-point-num {
-  color: #333;
+  color: #fff;
   font-weight: 500;
   font-size: 15px;
   text-decoration: none;
@@ -315,7 +318,7 @@ img {
   display: block;
 }
 
-.logout,.user-admin {
+.logout, .user-admin {
   color: #fff;
   text-decoration: none;
   padding: 10px 15px;
