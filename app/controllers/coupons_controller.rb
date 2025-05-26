@@ -2,8 +2,7 @@ class CouponsController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin_user!
   def index
-    # binding.pry
-    @coupons = Coupon.all
+    @coupons = Coupon.all.order(created_at: :desc)
   end
 
   def new

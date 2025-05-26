@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
 
   # 商品管理・一覧ページ
   def dashboard
-    @items = Item.order(updated_at: :desc)
+    @items = Item.order(created_at: :desc)
     render 'items/dashboard'
   end
 
