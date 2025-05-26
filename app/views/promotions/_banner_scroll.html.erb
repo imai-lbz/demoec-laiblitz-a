@@ -3,6 +3,9 @@
     overflow: hidden;
     position: relative;
     width: 100%;
+    background-color: #232F3E;
+    padding: 20px;
+    margin-bottom: 50px;
   }
 
   .scroll-banner-track {
@@ -32,7 +35,7 @@
           <div class="scroll-banner-item">
             <%= link_to "#", style: "text-decoration: none;" do %>
               <div style="position: relative; width: 100%; height: 100%;">
-                <%= image_tag promotion.image, style: "height: 100%; width: auto; object-fit: cover; border-radius: 8px;" %>
+                <%= image_tag promotion.image, style: "height: 100%; width: auto; object-fit: cover;" %>
                 <div style="
                   position: absolute;
                   bottom: 0;
@@ -42,8 +45,6 @@
                   color: white;
                   padding: 8px;
                   font-size: 1rem;
-                  border-bottom-left-radius: 8px;
-                  border-bottom-right-radius: 8px;
                 ">
                   <%= truncate(promotion.title, length: 30) %>
                 </div>
