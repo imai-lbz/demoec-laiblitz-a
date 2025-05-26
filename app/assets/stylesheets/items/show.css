@@ -190,3 +190,121 @@
   bottom: 150px;
   right: 10px;
 }
+
+
+/* マイページ */
+.coupons-container {
+  margin: 50px 0 70px 0;
+}
+
+.coupon-gold {
+  display: flex;
+  border: 2px solid rgb(100, 78, 7);;
+  width: 100%;
+  max-width: 620px;
+  background: linear-gradient(45deg, #694602 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);;
+  margin-bottom: 10px;
+  position: relative;
+}
+.coupon-silver {
+  display: flex;
+  border: 2px solid rgb(100, 78, 7);;
+  width: 100%;
+  max-width: 620px;
+  background: linear-gradient(45deg, #3f3f3f 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+  margin-bottom: 10px;
+  position: relative;
+}
+.coupon-bronze {
+  display: flex;
+  border: 2px solid rgb(100, 78, 7);;
+  width: 100%;
+  max-width: 620px;
+  background: linear-gradient(45deg, #744921 0%, #cd7f32 20%, #eabf87 45%, #ffe5b4 50%, #eabf87 55%, #cd7f32 80%, #7b4e23 90% 100%);
+  margin-bottom: 10px;
+  position: relative;
+}
+.coupon-title {
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  color: rgb(100, 78, 7);
+}
+.coupon-discount {
+  font-size: 40px;
+  font-weight: 900;
+  color: rgb(100, 78, 7);
+}
+.coupon-expiry {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(100, 78, 7);
+}
+.left {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 40px 20px;
+}
+.right {
+  position: relative;
+  display: flex;
+  width: 160px;
+  padding: 40px 20px;
+  border-left: 2px dashed rgb(100, 78, 7);
+  justify-content: center;
+}
+.right-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* circle-css */
+.right::before,
+.right::after {
+  position: absolute;
+  border: 2px solid rgb(100, 78, 7);
+  display: block;
+  content: "";
+  border-radius: 100%;
+  background: white;
+  box-sizing: border-box;
+  left: -12px;
+  width: 22px;
+  height: 22px;
+}
+
+.right::before {
+  top: -11px;
+}
+.right::after {
+  bottom: -11px;
+}
+.right-inner::before,
+.right-inner::after {
+  position: absolute;
+  display: block;
+  content: "";
+  border-radius: 100%;
+  background: white;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  left: -13px;
+}
+.right-inner::before {
+  top: -19px;
+}
+.right-inner::after {
+  bottom: -19px;
+}
+
+.favorite_items {
+  padding-bottom: 70px;
+}
