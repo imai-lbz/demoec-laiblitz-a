@@ -223,6 +223,19 @@ img {
   border-color: var(--color-primary);
 }
 
+.visually-hidden-submit-button {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  /* tab-index: -1; */
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
 
 /* ユーザードロップダウンメニュー */
 .user-menu {
@@ -517,8 +530,7 @@ img {
 .categories-section,
 .featured-products-section {
   max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-lg) 0 calc(var(--spacing-2xl) + 0.5rem);;
 }
 
 .section-header {
@@ -531,6 +543,11 @@ img {
 .section-title {
   font-size: var(--font-size-2xl);
   font-weight: 700;
+}
+
+.center-title {
+  text-align: center;
+  width: 100%;
 }
 
 .view-all-link {
@@ -601,6 +618,22 @@ img {
   font-size: var(--font-size-lg);
   font-weight: 500;
   color: white;
+}
+
+/* 商品絞り込み */
+.display-flex-content{
+  display: flex;
+    margin: 0 auto;
+  justify-content: space-around;
+}
+
+.select-items{
+  margin: 0 auto;
+}
+
+.select-content{
+  font-size: var(--font-size-xl);
+    font-weight: 600;
 }
 
 /* 商品カード */
@@ -1186,4 +1219,35 @@ img {
   }
 }
 
+/* 以下は勝手に追加した */
+.notice-table {
+  margin: 0 auto;
+  width: 700px;
+  overflow-x: auto;
+}
 
+.notice-table table {
+  /* width: 100%; */
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.notice-table th,
+.notice-table td {
+  /* border: 1px solid var(--color-border); */
+  padding: 12px;
+  text-align: left;
+  vertical-align: top;
+  font-size: var(--font-size-sm);
+}
+
+.notice-table th {
+  background-color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.notice-table td.content-col {
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.5;
+}

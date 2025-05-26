@@ -7,6 +7,35 @@ class ItemsController < ApplicationController
   # トップページ
   def index
     @items = Item.order(created_at: :desc)
+    @items = @items.where(condition_id: params[:condition_id]) if params[:condition_id].present?
+    @promotions = Promotion.all.order(updated_at: :desc)
+    @notices = Notice.all.order(created_at: :desc)
+    gon.items = @items.map do |item|
+      {
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        condition_id: item.condition_id,
+        condition_name: item.condition&.name,
+        category_id: item.category_id,
+        category_name: item.category&.name,
+        image_url: item.image.attached? ? url_for(item.image) : nil,
+        is_sold_out: item.sold_out?
+      }
+    end
+  end
+
+  def category_index
+    @items = Item.where(category_id: params[:category_id]).order(created_at: :desc)
+    render :index
+  end
+
+  def search
+    search_keyword = "%#{params[:q]}%"
+    @items = Item.where('name LIKE ? OR description LIKE ?', search_keyword, search_keyword).order(created_at: :desc)
+    render :index
+    @promotions = Promotion.all.order(updated_at: :desc)
+    @notices = Notice.all.order(created_at: :desc)
   end
 
   # 商品管理・一覧ページ

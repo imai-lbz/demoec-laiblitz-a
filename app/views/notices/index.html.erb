@@ -1,0 +1,63 @@
+<%= render "shared/second-header" %>
+
+<div class="container">
+  <div class="card-layout">
+    <div class="card-header">
+      <h1 class="app-title">DemoEC お知らせ管理</h1>
+    </div>
+
+    <div class="item-list-container">
+      <div class="item-list-header">
+        <div>
+          <h2 class="section-title">登録したお知らせ一覧</h2>
+          <p class="section-description">
+            登録されているお知らせの一覧です。<%= @notices.count %>個のお知らせが見つかりました。
+          </p>
+        </div>
+
+        <div class="list-header-actions">
+          <%= link_to 'お知らせを登録する', new_notice_path, class: "new-item-button" %>
+        </div>
+      </div>
+
+      <%# todo: cssをクーポンテーブル用に作成したほうが良い。現時点では商品管理画面のcssを流用している %>
+      <div class="item-table">
+        <table>
+          <thead>
+            <tr>
+              <th>お知らせ名</th>
+              <th>内容</th>
+              <th>登録日</th>
+              <th>アクション</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @notices.each do |notice| %>
+              <tr>
+
+                <td class="price-col">
+                  <%= notice.title %>
+                </td>
+
+                <td class="price-col">
+                  <%= notice.content %>
+                </td>
+                
+                <td class="category-col">
+                <%= notice.created_at.strftime("%Y-%m-%d") %>
+                </td>
+
+                <td class="actions-col">
+                  <%= form_tag(notice_path(notice), method: :delete, data: { turbo: false }) do %>
+                    <%= button_tag '削除', class: "admin-action-button" %>
+                  <% end %>
+                </td>
+                
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

@@ -5,16 +5,36 @@
     </div>
 
     <nav class="main-nav desktop-only">
-      <% nav_items = [{'name': 'ホーム', 'href': root_path}, {'name': 'カテゴリー', 'href': "#"},{'name': '人気商品', 'href': "#"}] %>
+      <% nav_items = [
+        {'name': 'ホーム', 'href': root_path},
+        {'name': 'カテゴリー', 'href': "#", 'has_dropdown': true, 'dropdown_items': []},
+        {'name': '人気商品', 'href': "#"}
+      ] %>
+
       <% nav_items.each do |item| %>
-        <%= link_to item[:name], item[:href], class: "nav-link #{controller_name == item[:href].gsub('/', '') ? 'active' : ''}" %>
+        <% if item[:has_dropdown] %>
+          <div class="user-dropdown">
+            <%= link_to item[:name], item[:href], class: "nav-link #{controller_name == item[:href].gsub('/', '') ? 'active' : ''}" %>
+            <div class="dropdown-content">
+              <% Category.all.each do |category| %>
+                <%= link_to category.name, category_path(category_id: category.id), class: "user-admin" %>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <%= link_to item[:name], item[:href], class: "nav-link #{controller_name == item[:href].gsub('/', '') ? 'active' : ''}" %>
+        <% end %>
       <% end %>
     </nav>
 
     <div class="header-actions desktop-only">
       <div class="search-container">
         <i class="fas fa-search"></i>
-        <input type="search" placeholder="商品を検索..." class="search-input">
+        <%= form_with url: search_path, method: :get, local: true, class: "search-form" do |form| %>
+        <%# form_with url: search_items_path, method: :get, scope: nil, local: true, class: "search-form" do |form| %>
+          <%= form.search_field :q, placeholder: "商品を検索...", class: "search-input" %>
+          <%= form.submit "検索", class: "visually-hidden-submit-button" %>
+        <% end %>
       </div>
 
       <div class="user-menu">
@@ -40,6 +60,8 @@
                 <%= link_to 'ユーザー管理', users_path, class: "user-admin" %>
                 <%= link_to '商品管理', dashboard_items_path, class: "user-admin" %>
                 <%= link_to 'クーポン管理', coupons_path, class: "user-admin" %>
+                <%= link_to 'プロモーション管理', promotions_path, class: "user-admin" %>
+                <%= link_to 'お知らせ管理', notices_path, class: "user-admin" %>
               <% end %>
               <%# 一般ユーザー限定のプルダウンメニュー %>
               <% if !current_user.admin? %>

@@ -1,0 +1,57 @@
+<style>
+  .scroll-banner-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .scroll-banner-track {
+    display: flex;
+    animation: scroll-banner 40s linear infinite;
+    width: fit-content;
+  }
+
+  .scroll-banner-item {
+    flex: 0 0 auto;
+    /* width: 300px; */
+    height: 200px;
+    margin-right: 16px;
+  }
+
+  @keyframes scroll-banner {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
+
+<div class="scroll-banner-wrapper">
+  <div class="scroll-banner-track">
+    <% 10.times do %>
+      <% promotions.each do |promotion| %>
+        <% if promotion.image.attached? %>
+          <div class="scroll-banner-item">
+            <%= link_to "#", style: "text-decoration: none;" do %>
+              <div style="position: relative; width: 100%; height: 100%;">
+                <%= image_tag promotion.image, style: "height: 100%; width: auto; object-fit: cover; border-radius: 8px;" %>
+                <div style="
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  background: rgba(0, 0, 0, 0.6);
+                  color: white;
+                  padding: 8px;
+                  font-size: 1rem;
+                  border-bottom-left-radius: 8px;
+                  border-bottom-right-radius: 8px;
+                ">
+                  <%= truncate(promotion.title, length: 30) %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
