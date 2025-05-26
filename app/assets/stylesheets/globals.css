@@ -258,6 +258,9 @@ img {
   padding: 8px 0;
   display: inline-block;
 }
+.user-nickname.admin {
+  color: #232f3e;
+}
 
 .mypage-point {
   flex-flow: column;
