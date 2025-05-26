@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
         is_sold_out: item.sold_out?
       }
     end
+    gon.categories = Category.all.map { |c| { id: c.id, name: c.name } }
   end
 
   def category_index
