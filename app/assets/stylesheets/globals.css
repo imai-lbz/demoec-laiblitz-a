@@ -440,9 +440,10 @@ img {
 .home-page {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2xl);
   padding-bottom: var(--spacing-xl);
   display: flex;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* ヒーローセクション */
@@ -499,7 +500,6 @@ img {
   overflow-wrap: break-word;
   white-space: normal;
 }
-
 
 /* 出品ボタン */
 .purchase-btn {
