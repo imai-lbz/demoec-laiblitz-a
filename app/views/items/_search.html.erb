@@ -2,35 +2,11 @@
   <%# 商品一覧 %>
 <div class="display-flex-content">
   <div class="select-items">
-    <div class="select-price">
-      <div class="select-content">金額</div>
-        <div class="select-dropdown">
-          <%= select_tag :price_range,
-            options_for_select([
-              [300, 300],
-              [1000, 1000],
-              [2000, 2000],
-              [4000, 4000],
-              [50000, 50000],
-              [600000, 600000] 
-            ], params[:price_range]),
-            { prompt: '最低金額', class: 'select-box', id: 'item-min-price-select'}
-          %>
-      </div>
-      <div class="select-dropdown">
-        <%= select_tag :price_range,
-          options_for_select([
-            [300, 300],
-            [1000, 1000],
-            [2000, 2000],
-            [4000, 4000],
-            [50000, 50000],
-            [600000, 600000] 
-          ], params[:price_range]),
-          { prompt: '最高金額', class: 'select-box', id: 'item-max-price-select'}
-        %>
-      </div>
-    </div>
+    <div class="select-content">商品の金額</div>
+    <div id="slider"></div>
+    <p>選択範囲: <span id="range"></span></p>
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.0/dist/nouislider.min.js"></script>
+
     <div class="select-condition">
       <div class="select-content">商品の状態</div>
       <div class="select-dropdown">
@@ -42,5 +18,6 @@
     <div id="selected-categories" class="selected-categories">
       <div class="select-content">商品のカテゴリ</div>
     </div>
+    
   </div>
 </div>

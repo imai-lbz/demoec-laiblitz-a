@@ -2,10 +2,61 @@ const search = () => {
   const items = gon.items;
   const categories = gon.categories
   const conditionDropdown = document.getElementById("item-condition-select");
-  const priceMinDropdown = document.getElementById("item-min-price-select");
-  const priceMaxDropdown = document.getElementById("item-max-price-select");
   const productsGrid = document.getElementById("products-grid");
-  if (!conditionDropdown || !productsGrid || !priceMinDropdown || !priceMaxDropdown) return;
+  const slider = document.getElementById('slider');
+  const rangeDisplay = document.getElementById('range');
+  if (!conditionDropdown || !productsGrid) return;
+
+
+  const isSameItemList = (currentElements, newItems) => {
+    const currentIds = Array.from(currentElements)
+      .map(el => parseInt(el.id, 10));
+    const newIds = newItems.map(item => item.id);
+
+    if (currentIds.length !== newIds.length) return false;
+
+    if (currentIds.every((id, i) => id === newIds[i])) {
+      console.log("問題なし")
+    }else{
+      console.log("aaa",currentIds)
+      console.log(newIds)
+    }
+
+    return currentIds.every((id, i) => id === newIds[i]);
+  };
+
+  const updatePriceRangeView = (min, max) => {
+    if (rangeDisplay) {
+      rangeDisplay.textContent = `¥${min.toLocaleString()} 〜 ¥${max.toLocaleString()}`;
+    }
+  };
+
+
+  const setSlider = () => {
+    const prices = items.map(item => item.price);
+    const minPrice = Math.min(...prices);
+    const maxPrice = Math.max(...prices);
+    
+    noUiSlider.create(slider, {
+      start: [minPrice, maxPrice],
+      connect: true,
+      range: {
+        'min': minPrice,
+        'max': maxPrice
+      },
+      tooltips: true, // 吹き出し表示
+      format: {
+        to: value => Math.round(value),
+        from: value => Number(value)
+      }
+    });
+    const rangeDisplay = document.getElementById('range');
+    slider.noUiSlider.on('update', function(values) {
+      const [minPrice, maxPrice] = values.map(v => parseInt(v, 10));
+      updatePriceRangeView(minPrice, maxPrice); // ← 追加
+      filterAndDisplayItems()
+    });
+  }
 
   const categoryLinks = document.querySelectorAll(".category-link");
   const selectedCategoriesArea = document.getElementById("selected-categories");
@@ -53,7 +104,6 @@ const search = () => {
 
   const filterCategory = (items) => {
     const selectedCategoryIds  = getSelectedCategoryIds()
-    console.log(selectedCategoryIds)
     if (selectedCategoryIds.length === 0) {
       return items; // カテゴリが選択されていなければ全件返す
     }
@@ -102,7 +152,6 @@ const search = () => {
 
   const buildHtml = (item) => {
     let favoriteFrameHtml = '';
-    console.log(gon.current_user)
 
     // ユーザーがログインしていて、かつ管理者でないときだけハートを表示
     if (gon.current_user && !gon.current_user.admin_flag) {
@@ -133,34 +182,42 @@ const search = () => {
 
 
   const filterAndDisplayItems = () => {
-    productsGrid.innerHTML = '';
-
     let filteredItems = items;
+    const [minPrice, maxPrice] = slider.noUiSlider.get().map(value => parseInt(value, 10));
 
     filteredItems = filterCategory(filteredItems)
     filteredItems = filterCondition(filteredItems,conditionDropdown.value);
-    filteredItems = filterMinPrice(filteredItems,priceMinDropdown.value);
-    filteredItems = filterMaxPrice(filteredItems,priceMaxDropdown.value);
+    filteredItems = filterMinPrice(filteredItems,minPrice);
+    filteredItems = filterMaxPrice(filteredItems,maxPrice);
 
-    console.log("最終的に絞り込まれた商品データ:", filteredItems);
+    const currentElements = productsGrid.querySelectorAll('.product-card-container');
+
+    if (isSameItemList(currentElements, filteredItems)) {
+      return;
+    }
+
+    productsGrid.innerHTML = '';
+
+
 
     if (filteredItems.length > 0) {
       filteredItems.forEach(item => {
         const itemElement = document.createElement('div');
-    itemElement.classList.add('product-card-container'); // ✅ ここを統一
+        itemElement.classList.add('product-card-container');
+        itemElement.id = `${item.id}`;
 
-    itemElement.innerHTML = buildHtml(item); // ❌ <a> は buildHtml() の中だけに
-    productsGrid.appendChild(itemElement);
+        itemElement.innerHTML = buildHtml(item);
+        productsGrid.appendChild(itemElement);
 
       });
     } else {
       productsGrid.innerHTML = '<p>該当する商品はありません。</p>';
     }
   };
+  
+  setSlider()
 
   conditionDropdown.addEventListener("change", filterAndDisplayItems);
-  priceMinDropdown.addEventListener("change", filterAndDisplayItems);
-  priceMaxDropdown.addEventListener("change", filterAndDisplayItems);
 
 };
 
