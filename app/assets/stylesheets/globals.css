@@ -120,9 +120,11 @@ img {
   top: 0;
   z-index: 50;
   width: 100%;
-  border-bottom: 1px solid var(--color-border);
-  background-color: var(--color-background);
+  /* border-bottom: 1px solid var(--color-border); */
+  /* background-color: var(--color-background); */
   box-shadow: var(--shadow-sm);
+  background-color: #232F3E;
+  margin-bottom: 0;
 }
 
 .header-container {
@@ -181,7 +183,8 @@ img {
   font-size: var(--font-size-sm);
   font-weight: 500;
   color: var(--color-text-light);
-  transition: color var(--transition-fast);
+  /* transition: color var(--transition-fast); */
+  color: #ffffff;
 }
 
 .nav-link:hover,
@@ -249,7 +252,7 @@ img {
 }
 
 .user-nickname {
-  color: #333;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 500;
   padding: 8px 0;
@@ -454,7 +457,7 @@ img {
 
 .hero-image-container {
   position: relative;
-  height: 500px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -467,8 +470,9 @@ img {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
+  background: linear-gradient(to right, rgba(250, 0, 0, 0.377), rgba(250, 0, 0, 0.429));
   z-index: 5;
+  margin-top: 0;
 }
 
 .hero-content {
@@ -486,7 +490,7 @@ img {
 }
 
 .hero-title {
-  max-width: 36rem;
+  max-width: 40rem;
   font-size: var(--font-size-3xl);
   font-weight: 700;
   line-height: 1.2;
@@ -494,7 +498,7 @@ img {
 
 .hero-description {
   margin-top: var(--spacing-md);
-  max-width: 24rem;
+  max-width: 30rem;
   color: #ffffff;
   word-wrap: break-word;
   overflow-wrap: break-word;
