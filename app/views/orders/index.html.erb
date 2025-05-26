@@ -53,20 +53,18 @@
 
         <%# 支払額の表示 %>
         <div class="payment-summary">
-          <div class="summary-row">
+          <div class="summary-row" id="item-original-price">
             <span>商品金額</span>
             <span id="original-price"><%= @order.charge_amount %></span>
           </div>
-          <div class="summary-row">
+          <div class="summary-row" id="applied-coupon-price" style="display: none;">
             <span>クーポン使用分</span>
-            <span  id="coupon-discount-amount">- ¥0<%= %></span>
+            <span id="coupon-discount-amount"></span>
           </div>
-          <% if !@order.used_point == 0 %>
-            <div class="summary-row">
-              <span>ポイント使用分</span>
-              <span id="point-discount-amount">- ¥0<%= %></span>
-            </div>
-          <% end %>
+          <div class="summary-row" id="applied-point-price" style="display: none;">
+            <span>ポイント使用分</span>
+            <span id="point-discount-amount"></span>
+          </div>
           <div class="summary-row total">
             <span>お支払い金額</span>
             <span id="total-amount">¥<%= @order.charge_amount %></span>
