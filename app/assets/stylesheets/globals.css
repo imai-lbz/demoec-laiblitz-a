@@ -469,7 +469,7 @@ img {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(250, 0, 0, 0.377), rgba(250, 0, 0, 0.429));
+  background: linear-gradient(to right, #ff4800e7, rgba(250, 0, 0, 0.429));
   z-index: 5;
   margin-top: 0;
 }
