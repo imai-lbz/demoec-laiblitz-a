@@ -25,10 +25,10 @@ class ItemsController < ApplicationController
     gon.categories = Category.all.map { |c| { id: c.id, name: c.name } }
   end
 
-  def category_index
-    @items = Item.where(category_id: params[:category_id]).order(created_at: :desc)
-    render :index
-  end
+  # def category_index
+  #   @items = Item.where(category_id: params[:category_id]).order(created_at: :desc)
+  #   render :index
+  # end
 
   def search
     search_keyword = "%#{params[:q]}%"
