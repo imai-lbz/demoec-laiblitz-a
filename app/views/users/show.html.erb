@@ -12,9 +12,9 @@
 
           <% @coupons.each do |coupon| %>
             
-            <% if coupon.discount_rate >= 80 %>
+            <% if coupon.discount_rate >= 20 %>
               <div class="coupon-gold">
-            <% elsif coupon.discount_rate >= 20 %>
+            <% elsif coupon.discount_rate >= 10 %>
               <div class="coupon-silver">
             <% else %>
               <div class="coupon-bronze">
