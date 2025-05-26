@@ -65,9 +65,9 @@
                   <%= item.created_at.strftime("%Y-%m-%d") %>
                 </td>
                 <td class="actions-col">
-                  <%= link_to '編集', edit_item_path(item), class: "admin-action-button" %>
+                  <%= link_to '編集', edit_item_path(item), class: "admin-edit-button" %>
                   <%= form_tag(item_path(item), method: :delete, data: { turbo: false }) do %>
-                    <%= button_tag '削除', class: "admin-action-button" %>
+                    <%= button_tag '削除', class: "admin-delete-button" %>
                   <% end %>
                 </td>
               </tr>
