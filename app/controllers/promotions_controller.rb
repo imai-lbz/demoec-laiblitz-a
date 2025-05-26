@@ -43,6 +43,6 @@ class PromotionsController < ApplicationController
   private
 
   def promotion_params
-    params.require(:promotion).permit(:title, :content, :image)
+    params.require(:promotion).permit(:title, :content, :image, :url)
   end
 end

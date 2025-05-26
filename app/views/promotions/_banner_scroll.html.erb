@@ -33,7 +33,7 @@
       <% promotions.each do |promotion| %>
         <% if promotion.image.attached? %>
           <div class="scroll-banner-item">
-            <%= link_to "#", style: "text-decoration: none;" do %>
+            <%= link_to promotion.url, style: "text-decoration: none;", target: "_blank" do %>
               <div style="position: relative; width: 100%; height: 100%;">
                 <%= image_tag promotion.image, style: "height: 100%; width: auto; object-fit: cover;" %>
                 <div style="
