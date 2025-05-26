@@ -5,12 +5,14 @@ class OrdersController < ApplicationController
 
   def index
     @item = Item.find_by(id: params[:item_id])
+    used_coupon_ids = current_user.orders.pluck(:coupon_id)
+    @coupons = Coupon.where.not(id: used_coupon_ids)
+
     if @item.present?
       assign_gon_data(@item)
       @order = Order.new(user: current_user, item: @item)
       @order.build_delivery_address
       @coupon_options = build_coupon_options
-
     else
       flash.now[:alert] = '商品が見つかりません。'
       redirect_to root_path

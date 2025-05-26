@@ -22,7 +22,7 @@
 
         <div class="coupon-summary">
           <div class="summary-row">
-            <label for="coupon-select">使用クーポン（クーポン名/割引率/期限）</label>
+            <label for="coupon-select">使用するクーポン</label>
           </div>
           <div class="summary-row used-coupon">
             <%= select_tag 'order[coupon_id]',
@@ -32,8 +32,7 @@
               class: "form-select" %>
           </div>
         </div>
-
-
+       
         <div class="point-summary">
           <div class="summary-row">
             <span>所持ポイント</span>
@@ -42,21 +41,35 @@
           <div class="summary-row used_point">
             <span>使用ポイント</span>
             <div>
-              <input type="number" id="used-point-input" class="used-point-input" min="0" max="<%= @order.user.point %>" value="<%= @order.used_point || 0 %>">
+              <input type="number" id="used-point-input" class="used-point-input"
+                min="0" max="<%= @order.user.point %>"
+                value="<%= @order.used_point || 0 %>"
+              >
               <button type="button" class="apply-point-btn">適用</button>
             </div>
           </div>
         </div>
+        
 
         <%# 支払額の表示 %>
         <div class="payment-summary">
           <div class="summary-row">
             <span>商品金額</span>
-            <span>¥<%= @order.charge_amount %></span>
+            <span id="original-price"><%= @order.charge_amount %></span>
           </div>
+          <div class="summary-row">
+            <span>クーポン使用分</span>
+            <span  id="coupon-discount-amount">- ¥0<%= %></span>
+          </div>
+          <% if !@order.used_point == 0 %>
+            <div class="summary-row">
+              <span>ポイント使用分</span>
+              <span id="point-discount-amount">- ¥0<%= %></span>
+            </div>
+          <% end %>
           <div class="summary-row total">
             <span>お支払い金額</span>
-            <span>¥<%= @order.charge_amount %></span>
+            <span id="total-amount">¥<%= @order.charge_amount %></span>
           </div>
         </div>
         <%# /支払額の表示 %>
