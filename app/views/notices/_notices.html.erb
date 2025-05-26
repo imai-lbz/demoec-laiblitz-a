@@ -1,25 +1,27 @@
 <section class="featured-products-section">
-    <div class="section-header">
-      <h2 class="section-title center-title"><%= title %></h2>
-    </div>
-    <div class="item-table notice-table">
-      <table>
-        <thead>
+  <div class="section-header">
+    <h2 class="section-title center-title"><%= title %></h2>
+  </div>
+  <div class="item-table notice-table">
+    <table>
+      <thead>
+        <tr>
+          <th>配信日</th>
+          <th>タイトル</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notices.each do |notice| %>
           <tr>
-            <th>お知らせ名</th>
-            <th>内容</th>
-            <th>着信日</th>
+            <td class="date-col"><%= notice.created_at.strftime("%Y-%m-%d") %></td>
+            <td class="title-col">
+              <span class="title-col-text"><%= notice.title %></span>
+            </td>
+            <td class="content-col"><%= simple_format(notice.content) %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @notices.each do |notice| %>
-            <tr>
-              <td class="title-col"><%= notice.title %></td>
-              <td class="content-col"><%= simple_format(notice.content) %></td>
-              <td class="date-col"><%= notice.created_at.strftime("%Y-%m-%d") %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </section>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
