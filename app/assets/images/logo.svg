@@ -8,4 +8,5 @@
 
   <!-- FURIMAテキスト - 大文字で表示、アイコンとの間隔を半分に -->
   <text stroke="none" x="150" y="125" font-family="Arial, sans-serif" font-size="100" font-weight="bold" fill="#FFFFFF" letter-spacing="5">DemoEC</text>
+<polygon points="157,150 195,180 520,150" fill="#FFFFFF" stroke="none"/>
 </svg>
