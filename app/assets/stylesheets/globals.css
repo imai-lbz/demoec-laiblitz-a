@@ -1256,6 +1256,38 @@ img {
   line-height: 1.5;
 }
 
+/* スライダー */
+
+#slider.noUi-target,
+#slider .noUi-base,
+#slider .noUi-connects   {
+  height: 4px
+}
+
+
+/* 選択された範囲の部分（色付きの部分） */
+#slider .noUi-connect {
+  height: 4px;
+  background-color: var(--color-primary); 
+  border-radius: 2px;
+}
+
+#slider .noUi-handle {
+  width: 20px;
+  height: 20px;
+  top: -7px;
+  right: -7px;
+  background-color: #808080;
+  border-radius: 50%;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#slider .noUi-handle::before,
+#slider .noUi-handle:after {
+  display: none;
+}
+
 .title-col-text{
   background-color: bisque;
   border-radius: 5px;
