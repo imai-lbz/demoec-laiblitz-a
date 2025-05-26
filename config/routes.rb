@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   root 'items#index'
   get 'search', to: 'items#search'
-  get 'category/:category_id', to: 'items#category_index', as: :category
+  # get 'category/:category_id', to: 'items#category_index', as: :category
   resources :items, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     collection do
       get "dashboard"
     end
     resources :orders, only: [:index, :create]
     resource :favorites, only: [:create, :destroy]
+    member do
+      get :favorite_frame
+    end
   end
 
   # ユーザー認証
