@@ -157,7 +157,7 @@ const search = () => {
     if (gon.current_user && !gon.current_user.admin_flag) {
       favoriteFrameHtml = `
         <turbo-frame id="favorite_item_${item.id}" src="/items/${item.id}/favorite_frame">
-          <div class="loading">♡ 読み込み中</div>
+          <div class="loading">お気に入りの読み込み中</div>
         </turbo-frame>
       `;
     }

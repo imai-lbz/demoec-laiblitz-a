@@ -140,7 +140,7 @@
 }
 
 .btn-purchase {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
   color: white;
 }
 
@@ -155,7 +155,7 @@
 }
 
 /* 商品詳細用のハートマーク */
-.like-btn {
+.like-btn, .unlike-btn {
   font-size: 5vw !important;
   color: #e54747;
   position: absolute;
@@ -164,16 +164,11 @@
   z-index: 10;
 }
 .unlike-btn {
-  font-size: 5vw !important;
   color: #808080; 
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
 }
 
 /* 商品一覧用のハートマーク */
-.like-btn_products {
+.like-btn_products, .unlike-btn_products {
   font-size: 30px !important;
   color: #e54747;
   z-index: 10;
@@ -183,12 +178,7 @@
 }
 
 .unlike-btn_products {
-  font-size: 30px !important;
   color: #808080; 
-  z-index: 10;
-  position: absolute;
-  bottom: 150px;
-  right: 10px;
 }
 
 

@@ -16,7 +16,7 @@
 .new-item-button {
   display: flex;
   align-items: center;
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-dark);
   color: #fff;
   border: none;
   border-radius: 6px;
