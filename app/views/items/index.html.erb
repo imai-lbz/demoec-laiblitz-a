@@ -16,7 +16,9 @@
   <%# /商品一覧 %>
   <%= render partial: 'promotions/banner_scroll', locals: { promotions: @promotions } %>
   <div class="display-flex-content">
-    <%= render "search" %>
+    <div class="search-wrapper">
+      <%= render "search" %>
+    </div>
     <%= render "products", items: @items, title: "新着商品", show_link: true %>
   </div>
   <%= render "notices/notices", notices: @notices, title: "お知らせ"%>
