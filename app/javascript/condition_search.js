@@ -5,7 +5,7 @@ const search = () => {
   const productsGrid = document.getElementById("products-grid");
   const slider = document.getElementById('slider');
   const rangeDisplay = document.getElementById('range');
-  if (!conditionDropdown || !productsGrid) return;
+  if (!conditionDropdown || !productsGrid || !slider) return;
 
 
   const isSameItemList = (currentElements, newItems) => {
@@ -33,6 +33,11 @@ const search = () => {
 
 
   const setSlider = () => {
+    if (slider.noUiSlider) {
+      console.log("noUisliderはすでに初期化されています。");
+      slider.noUiSlider.destroy();
+    }
+
     const prices = items.map(item => item.price);
     const minPrice = Math.min(...prices);
     const maxPrice = Math.max(...prices);
@@ -50,7 +55,7 @@ const search = () => {
         from: value => Number(value)
       }
     });
-    const rangeDisplay = document.getElementById('range');
+    // const rangeDisplay = document.getElementById('range');
     slider.noUiSlider.on('update', function(values) {
       const [minPrice, maxPrice] = values.map(v => parseInt(v, 10));
       updatePriceRangeView(minPrice, maxPrice); // ← 追加
