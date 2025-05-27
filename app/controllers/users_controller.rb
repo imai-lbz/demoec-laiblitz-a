@@ -15,8 +15,7 @@ class UsersController < ApplicationController
     @items = Item.where(id: favorite_item_ids)
     @orders = Order.order(created_at: :desc)
     # ユーザーが使用したクーポン以外を取得する
-    used_coupon_ids = current_user.orders.pluck(:coupon_id)
-    @coupons = Coupon.where.not(id: used_coupon_ids)
+    @coupons = @user.unexpired_coupon
   end
 
   def destroy

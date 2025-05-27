@@ -68,9 +68,7 @@
                 <%= link_to "マイページ", mypage_path, class: "logout" %>
               <% end %>
               <%# 共通のプルダウンメニュー %>
-              <%= form_tag(destroy_user_session_path, method: :delete) do %>
-                <%= button_tag 'ログアウト', class: "logout" %>
-              <% end %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,data: { turbo: false }, class: 'user-admin' %>
             </div>
           </div>
         <% else %>
