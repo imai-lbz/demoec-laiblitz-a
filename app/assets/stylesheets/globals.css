@@ -712,10 +712,15 @@ img {
   gap: var(--spacing-lg);
 }
 
+
 .product-card-container {
   position: relative;
   display: inline-block;
 }
+.product-card-container {
+  min-width: 170px;
+}
+
 
 .product-card {
   display: flex;
