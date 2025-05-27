@@ -26,4 +26,8 @@ class User < ApplicationRecord
   def unexpired_coupon_assignments
     coupon_assignments.joins(:coupon).where('coupons.expires_at >= ?', Time.current)
   end
+
+  def unexpired_coupon
+    unexpired_coupon_assignments.includes(:coupon).map(&:coupon)
+  end
 end
