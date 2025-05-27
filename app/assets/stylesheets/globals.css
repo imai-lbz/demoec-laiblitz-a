@@ -204,6 +204,7 @@ img {
 
 .search-container {
   position: relative;
+  width: 250px;
 }
 
 .fa-search {
@@ -559,7 +560,7 @@ img {
 /* カテゴリーセクション */
 .categories-section,
 .featured-products-section {
-  max-width: var(--container-width);
+  max-width: calc(var(--container-width) - 250px);
   padding: 0 var(--spacing-lg) 0 calc(var(--spacing-2xl) + 0.5rem);;
   margin-left: auto;
   margin-right: auto;
@@ -1369,4 +1370,9 @@ img {
 #slider .noUi-handle::before,
 #slider .noUi-handle:after {
   display: none;
+}
+
+.search-wrapper {
+  width: 250px; /* 必要に応じて調整 */
+  flex-shrink: 0;
 }
