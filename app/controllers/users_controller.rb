@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     # ユーザーがお気に入り登録した商品一覧を取得
     favorite_item_ids = @user.favorites.pluck(:item_id)
     @items = Item.where(id: favorite_item_ids)
-    @orders = Order.order(created_at: :desc)
+    @orders = Order.where(user_id: @user.id).order(created_at: :desc)
     # ユーザーが使用したクーポン以外を取得する
     used_coupon_ids = current_user.orders.pluck(:coupon_id)
     @coupons = Coupon.where.not(id: used_coupon_ids)
