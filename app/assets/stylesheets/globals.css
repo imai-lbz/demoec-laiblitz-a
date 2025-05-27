@@ -254,8 +254,12 @@ img {
 .user-dropdown {
   position: relative;
 }
-.user-dropdown, .dropdown-content {
-  background-color: #232F3E !important;
+.user-dropdown {
+  background-color: #232F3E;
+}
+
+.user-dropdown.admin{
+  background-color:#ffffff;
 }
 
 .user-nickname {
@@ -307,12 +311,17 @@ img {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
+  background-color: #232F3E;
   min-width: 120px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   z-index: 100;
 }
+
+.dropdown-content.admin{
+  background-color: #ffffff;
+}
+
 
 .user-dropdown:hover .dropdown-content {
   display: block;
@@ -324,6 +333,10 @@ img {
   padding: 10px 15px;
   display: block;
   font-size: 14px;
+}
+
+.user-admin.admin {
+  color: #232F3E;
 }
 
 .logout:hover, .user-admin:hover {
