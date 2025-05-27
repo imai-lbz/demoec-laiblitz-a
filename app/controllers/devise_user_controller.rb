@@ -5,6 +5,12 @@ class DeviseUserController < Devise::RegistrationsController
   def create
     super do |resource|
       is_admin = request.referrer.present? && request.referrer.include?('/users/admin_new')
+
+      if resource.errors.any? && is_admin
+        @admin_user = resource
+        render 'admin_users/new', status: :unprocessable_entity and return
+      end
+
       resource.admin_flag = is_admin
       resource.save
       # その他のカスタム処理があればここに記述します
