@@ -1,0 +1,19 @@
+<% coupons.each do |coupon| %>
+  <% if coupon.discount_rate >= 20 %>
+    <div class="coupon-gold">
+  <% elsif coupon.discount_rate >= 10 %>
+    <div class="coupon-silver">
+  <% else %>
+    <div class="coupon-bronze">
+  <% end %>
+      <div class="left">
+        <div class="coupon-title"><%= coupon.name %></div>
+        <div class="coupon-discount"><%= coupon.discount_rate %>% OFF</div>
+      </div>
+      <div class="right">
+        <div class="right-inner">
+          <div class="coupon-expiry">有効期限<br><%= coupon.expires_at.strftime('%Y-%m-%d') %></div>
+        </div>
+      </div>
+  </div>
+<% end %>

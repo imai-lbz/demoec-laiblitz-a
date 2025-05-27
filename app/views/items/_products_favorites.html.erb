@@ -1,0 +1,46 @@
+<section class="featured-products-section mypage">
+    <div class="products-grid" id="products-grid">
+      <% if items.any? %>
+        <% items.each do |item| %>
+          <div class="product-card-container" id="<%= item.id %>">
+
+            <% if user_signed_in? && !current_user.admin? %>
+              <%= render "favorites/btn_for_products", item: item %>
+            <% end %>
+
+            <%= link_to  item_path(item), class: 'product-card' do %>
+              <div class="product-image-container">
+                <%= image_tag item.image, class: 'product-image' %>
+                <% if item.sold_out? %>
+                  <div class="sold-out-badge">
+                    <span>在庫なし</span>
+                  </div>
+                <% end %>
+              </div>
+              <div class="product-content">
+                <div class="product-category"><%= item.category.name  %></div>
+                <h3 class="product-name"><%= item.name  %></h3>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">¥<%= item.price  %></div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% else%>
+        <%# ダミー商品表示 %>
+        <%= link_to '#', class: 'product-card' do %>
+          <div class="product-image-container">
+            <%= image_tag "placeholder.svg", class: "product-image" %>
+          </div>
+          <div class="product-content">
+            <div class="product-category"></div>
+            <h3 class="product-name">商品準備中</h3>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">¥<span>99999999</span></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </section>

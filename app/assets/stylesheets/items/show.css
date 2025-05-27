@@ -183,8 +183,15 @@
 
 
 /* マイページ */
-.coupons-container {
-  margin: 50px 0 70px 0;
+.coupons-container,
+.favorite-items-container,
+.order-table-container {
+  margin: 50px 0 80px 0;
+}
+.coupon-gold,
+.coupon-silver,
+.coupon-bronze{
+  margin: 0 auto;
 }
 
 .coupon-gold {
@@ -296,6 +303,6 @@
   bottom: -19px;
 }
 
-.favorite_items {
+/* .favorite_items {
   padding-bottom: 70px;
-}
+} */

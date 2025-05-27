@@ -16,7 +16,6 @@ class UsersController < ApplicationController
     @orders = Order.order(created_at: :desc)
     # ユーザーが使用したクーポン以外を取得する
     @coupons = @user.unexpired_coupon
-    binding.pry
   end
 
   def destroy

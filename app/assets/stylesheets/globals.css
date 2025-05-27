@@ -565,6 +565,10 @@ img {
   margin-right: auto;
 }
 
+.featured-products-section.mypage{
+  padding: 0 var(--spacing-lg);;
+} 
+
 .section-header {
   display: flex;
   align-items: center;
