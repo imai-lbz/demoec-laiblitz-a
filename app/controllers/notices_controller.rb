@@ -1,4 +1,6 @@
 class NoticesController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :new, :create, :destroy]
+  before_action :authenticate_admin_user!, only: [:index, :new, :create, :destroy]
   def index
     @notices = Notice.all.order(created_at: :desc)
   end
