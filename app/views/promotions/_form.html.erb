@@ -8,10 +8,10 @@
     <div class="click-upload">
       <% if @promotion.image.attached? %>
         <%= f.label :image, 'クリックしてファイルを再アップロード', class: 'upload-label' %><br>
-        <%= f.file_field :image, id: 'item-image', class: 'file-input' %>
+        <%= f.file_field :image, id: 'item-image', class: 'file-input', accept: "image/*" %>
       <% else %>
         <%= f.label :image, 'クリックしてファイルをアップロード', class: 'upload-label' %><br>
-        <%= f.file_field :image, id: 'item-image', class: 'file-input' %>
+        <%= f.file_field :image, id: 'item-image', class: 'file-input', accept: "image/*" %>
       <% end %>
     </div>
   </div>
