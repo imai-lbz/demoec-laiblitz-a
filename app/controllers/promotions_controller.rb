@@ -10,6 +10,12 @@ class PromotionsController < ApplicationController
   def create
     @promotion = Promotion.new(promotion_params)
 
+    uploaded_file = params[:promotion][:image]
+    if uploaded_file.present? && !valid_image?(uploaded_file)
+      @promotion.errors.add(:image, 'が正しいファイルではありません')
+      return render :new, status: :unprocessable_entity
+    end
+
     if @promotion.save
       redirect_to promotions_path, notice: 'プロモーションが作成されました。'
     else
@@ -23,6 +29,13 @@ class PromotionsController < ApplicationController
 
   def update
     @promotion = Promotion.find(params[:id])
+
+    uploaded_file = params[:promotion][:image]
+    if uploaded_file.present? && !valid_image?(uploaded_file)
+      @promotion.errors.add(:image, 'が正しいファイルではありません')
+      return render :new, status: :unprocessable_entity
+    end
+
     if @promotion.update(promotion_params)
       redirect_to promotions_path, notice: 'プロモーションが編集されました'
     else
@@ -41,6 +54,13 @@ class PromotionsController < ApplicationController
   end
 
   private
+
+  def valid_image?(uploaded_file)
+    return false unless uploaded_file.respond_to?(:tempfile)
+
+    type = FastImage.type(uploaded_file.tempfile)
+    %i[jpeg png gif webp bmp tiff].include?(type)
+  end
 
   def promotion_params
     params.require(:promotion).permit(:title, :content, :image, :url)

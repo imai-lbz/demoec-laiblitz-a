@@ -44,6 +44,12 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
+    uploaded_file = params[:item][:image]
+
+    if uploaded_file.present? && !valid_image?(uploaded_file)
+      @item.errors.add(:image, 'が正しいファイルではありません')
+      return render :new, status: :unprocessable_entity
+    end
     if @item.update(item_params)
       redirect_to dashboard_items_path, notice:
     else
@@ -63,6 +69,13 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+
+    uploaded_file = params[:item][:image]
+
+    if uploaded_file.present? && !valid_image?(uploaded_file)
+      @item.errors.add(:image, 'が正しいファイルではありません')
+      return render :new, status: :unprocessable_entity
+    end
     if @item.save
       redirect_to dashboard_items_path
     else
@@ -71,6 +84,13 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def valid_image?(uploaded_file)
+    return false unless uploaded_file.respond_to?(:tempfile)
+
+    type = FastImage.type(uploaded_file.tempfile)
+    %i[jpeg png gif webp bmp tiff].include?(type)
+  end
 
   def item_params
     params.require(:item).permit(:name, :description, :category_id, :condition_id, :price, :image)
