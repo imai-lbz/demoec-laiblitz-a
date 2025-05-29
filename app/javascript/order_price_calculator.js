@@ -47,7 +47,9 @@ const point = () => {
   };
 
   const calculateDiscountPrice = (discountRate) =>{
-    return itemPrice - itemPrice * discountRate / 100
+    // return itemPrice - itemPrice * discountRate / 100
+    const discount = Math.floor(itemPrice * discountRate / 100);
+    return itemPrice - discount;
   };
 
   const updateFinalPrice = () => {
@@ -74,6 +76,7 @@ const point = () => {
 
   applyPointBtn.addEventListener("click", updateFinalPrice);
   couponSelect.addEventListener("change", updateFinalPrice);
+  updateFinalPrice()
 };
 
 window.addEventListener("turbo:load", point);
