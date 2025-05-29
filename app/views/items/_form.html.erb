@@ -7,7 +7,7 @@
     </div>
     <div class="click-upload">
       <%= f.label :image, 'クリックしてファイルをアップロード', class: 'upload-label' %>
-      <%= f.file_field :image, id: 'item-image', class: 'file-input' %>
+      <%= f.file_field :image, id: 'item-image', class: 'file-input', accept: "image/*" %>
     </div>
   </div>
 
