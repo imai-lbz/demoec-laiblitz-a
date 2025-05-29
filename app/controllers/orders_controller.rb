@@ -69,13 +69,6 @@ class OrdersController < ApplicationController
     ).merge(token: params[:token], item_id: params[:item_id])
   end
 
-  def authenticate_non_admin!
-    return unless current_user.admin?
-
-    flash[:alert] = '一般ユーザーしか購入できません'
-    redirect_to root_path
-  end
-
   # 以下はcreateで使用するメソッドである
   def redirect_if_sold_out
     item = Item.find(params[:item_id])

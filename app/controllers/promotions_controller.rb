@@ -1,4 +1,6 @@
 class PromotionsController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :new, :create, :destroy, :edit, :update]
+  before_action :authenticate_admin_user!, only: [:index, :new, :create, :destroy, :edit, :update]
   def index
     @promotions = Promotion.all.order(created_at: :desc)
   end

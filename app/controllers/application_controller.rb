@@ -16,4 +16,11 @@ class ApplicationController < ActionController::Base
     flash[:alert] = '管理者権限が必要です。'
     redirect_to root_path
   end
+
+  def authenticate_non_admin!
+    return unless current_user.admin?
+
+    flash[:alert] = '一般ユーザーしか購入できません'
+    redirect_to root_path
+  end
 end
