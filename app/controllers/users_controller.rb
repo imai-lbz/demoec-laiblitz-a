@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!,       only: [:index, :destroy, :show]
   before_action :authenticate_admin_user!, only: [:index, :destroy]
   before_action :basic_auth, only: [:admin_new]
+  before_action :authenticate_non_admin!, only: [:show]
 
   def index
     @users = User.order(created_at: :desc)
