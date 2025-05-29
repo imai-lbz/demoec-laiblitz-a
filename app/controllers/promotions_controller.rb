@@ -10,7 +10,7 @@ class PromotionsController < ApplicationController
   def create
     @promotion = Promotion.new(promotion_params)
 
-    uploaded_file = params[:item][:image]
+    uploaded_file = params[:promotion][:image]
     if uploaded_file.present? && !valid_image?(uploaded_file)
       @promotion.errors.add(:image, 'が正しいファイルではありません')
       return render :new, status: :unprocessable_entity
@@ -30,7 +30,7 @@ class PromotionsController < ApplicationController
   def update
     @promotion = Promotion.find(params[:id])
 
-    uploaded_file = params[:item][:image]
+    uploaded_file = params[:promotion][:image]
     if uploaded_file.present? && !valid_image?(uploaded_file)
       @promotion.errors.add(:image, 'が正しいファイルではありません')
       return render :new, status: :unprocessable_entity
