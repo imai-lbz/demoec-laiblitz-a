@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @search_keyword = "#{params[:q]}"
+    @search_keyword = params[:q].present? ? params[:q] : ''
     @items = Item.where('name LIKE ? OR description LIKE ?', "%#{@search_keyword}%",
                         "%#{@search_keyword}%").order(created_at: :desc)
     apply_gon_for_js(@items)

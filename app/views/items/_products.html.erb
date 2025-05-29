@@ -34,6 +34,8 @@
             <% end %>
           </div>
         <% end %>
+      <% elsif @search_keyword.present? %>
+        該当する商品はありません。  
       <% else%>
         <%# ダミー商品表示 %>
         <%= link_to '#', class: 'product-card' do %>
